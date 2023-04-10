@@ -1,0 +1,29 @@
+﻿@model Burialmain
+
+    <div class="card card-outline-primary m-1 p-1">
+        <div class="bg-faded p-1">
+
+            <h1>hello</h1>
+            <h4>@Model.Area</h4>
+
+            <span class="badge bg-info" style="float:right">
+                Date: $@Model.Dateofexcavation
+            </span>
+        </div>
+
+        <ul>
+            <li>Sex: @Model.Sex</li>
+            <li>Age at Death: @Model.Ageatdeath</li>
+            <li>Fieldbook Excavation Year: @Model.Fieldbookexcavationyear</li>
+            <li>Fieldbook Page: @Model.Fieldbookpage</li>
+            <li>Text: @Model.Text</li>
+        </ul>
+
+        @*<form method="post" asp-page="/Shop">
+                <input type="hidden" asp-for="@Model.BookId" />
+                <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                <span class="card-text">
+                    <button type="submit" class="btn btn-success btn-sm float-end">Add to cart</button>
+                </span>
+            </form>*@
+    </div>

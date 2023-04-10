@@ -95,7 +95,7 @@ h6 {
 }
 
 #header.header-scrolled {
-  background: rgba(243, 160, 104, 0.9);
+  background: rgba(243, 160, 104);
   padding: 12px;
 }
 
@@ -598,7 +598,7 @@ section {
   right: 0;
   top: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.4);
   z-index: 9;
 }
 
@@ -1307,10 +1307,10 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  background: #263f49;
-  padding: 0 0 30px 0;
-  color: #fff;
-  font-size: 14px;
+    background: #202C39;
+    padding: 0 0 30px 0;
+    color: #fff;
+    font-size: 14px;
 }
 
 #footer .footer-top {
@@ -1318,13 +1318,13 @@ section {
 }
 
 #footer .footer-top .footer-info {
-  margin-top: -90px;
-  margin-bottom: 15px;
-  background: white;
-  color: #2f4d5a;
-  border-top: 4px solid #67b0d1;
-  text-align: center;
-  padding: 30px 20px;
+    margin-top: -90px;
+    margin-bottom: 15px;
+    background: white;
+    color: #2f4d5a;
+    border-top: 4px solid #F2D492;
+    text-align: center;
+    padding: 30px 20px;
 }
 
 #footer .footer-top .footer-info h3 {
@@ -1358,9 +1358,9 @@ section {
 }
 
 #footer .footer-top .social-links a:hover {
-  background: #67b0d1;
-  color: #fff;
-  text-decoration: none;
+    background: #F19455;
+    color: #fff;
+    text-decoration: none;
 }
 
 #footer .footer-top h4 {
@@ -1424,22 +1424,22 @@ section {
 }
 
 #footer .footer-top .footer-newsletter form input[type=submit] {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  border: 0;
-  background: none;
-  font-size: 16px;
-  padding: 0 20px;
-  background: #67b0d1;
-  color: #fff;
-  transition: 0.3s;
-  border-radius: 4;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border: 0;
+    background: none;
+    font-size: 16px;
+    padding: 0 20px;
+    background: #F19455;
+    color: #fff;
+    transition: 0.3s;
+    border-radius: 4;
 }
 
 #footer .footer-top .footer-newsletter form input[type=submit]:hover {
-  background: #409cc5;
+    background: #F19455;
 }
 
 #footer .copyright {

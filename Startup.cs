@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MummyNation_Team0113.Data;
 using System;
+using MummyNation_Team0113.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -76,12 +77,12 @@ namespace MummyNation_Team0113
             app.UseAuthorization();
             app.UseHsts();
             app.UseHttpsRedirection();
-            app.Use(async (context, next) =>
-            {
-                context.Response.Headers.Add("Content-Security-Policy",
-                    "default-src 'self'; script-src 'self' https://ajax.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'");
-                await next();
-            });
+            //app.Use(async (context, next) =>
+            //{
+            //    context.Response.Headers.Add("Content-Security-Policy",
+            //        "default-src 'self'; script-src 'self' https://ajax.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'");
+            //    await next();
+            //});
 
 
             app.UseEndpoints(endpoints =>
@@ -89,6 +90,9 @@ namespace MummyNation_Team0113
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "display",
+                    pattern: "{controller=DisplayData}/{action=DisplayData}");
                 endpoints.MapRazorPages();
             });
         }
