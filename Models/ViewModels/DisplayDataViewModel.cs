@@ -7,7 +7,7 @@ namespace MummyNation_Team0113.Models.ViewModels
 {
     public class DisplayDataViewModel
     {
-        public IQueryable<Burialmain> Burials { get; set; }
+        public IQueryable<Burialmain> burialmain { get; set; }
 
     }
 }

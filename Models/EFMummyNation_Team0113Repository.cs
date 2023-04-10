@@ -1,18 +1,21 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using MummyNation_Team0113.Models;
 
-//namespace BookProject.Models
-//{
-//    public class EFBookProjectRepository : IMummyNation_Team0113Repository
-//    {
-//        private MummyNation_Team0113Context context { get; set; }
+namespace MummyNation_Team0113.Models
+{
+    public class EFMummyNation_Team0113Repository : IMummyNation_Team0113Repository
+    {
+        private MummyContext context { get; set; }
 
-//        public EFBookProjectRepository(BookstoreContext temp)
-//        {
-//            context = temp;
-//        }
-//        public IQueryable<Book> Books => context.Books;
-//    }
-//}
+        public EFMummyNation_Team0113Repository(MummyContext temp)
+        {
+            context = temp;
+        }
+        public IQueryable<Burialmain> burialmain => context.Burialmain;
+
+        
+    }
+}

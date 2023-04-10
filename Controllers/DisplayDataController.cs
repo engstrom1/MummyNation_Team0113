@@ -20,7 +20,8 @@ namespace MummyNation_Team0113.Controllers
         {
             var x = new DisplayDataViewModel
             {
-                Burials = repo.Burials
+                burialmain = repo.burialmain
+                
             };
 
             return View(x);
