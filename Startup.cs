@@ -39,6 +39,17 @@ namespace MummyNation_Team0113
             services.AddSession();
             //services.AddScoped<IBookProjectRepository, EFBookProjectRepository>(); // each http request gets its own repository?
             //services.AddScoped<IPurchaseRepository, EFPurchaseRepository>();
+            services.AddHsts(options =>
+            {
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(365);
+            });
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequiredLength = 10;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireDigit = true;
+            });
         }
 
 
@@ -63,6 +74,8 @@ namespace MummyNation_Team0113
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseHsts();
+            app.UseHttpsRedirection();
 
 
             app.UseEndpoints(endpoints =>
