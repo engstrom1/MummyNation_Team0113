@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MummyNation_Team0113.Data;
 using System;
+using MummyNation_Team0113.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

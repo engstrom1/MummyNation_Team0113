@@ -2,9 +2,9 @@
 *@
 @{
 }
-@model BurialViewModel
+@model DisplayDataViewModel
 
-@foreach (Burialmain b in Model.Burials)
+@foreach (var b in Model.Burials)
 {
     <partial name="MummySummary" model="b"/>
 }
