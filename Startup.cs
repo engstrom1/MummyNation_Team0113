@@ -77,12 +77,12 @@ namespace MummyNation_Team0113
             app.UseAuthorization();
             app.UseHsts();
             app.UseHttpsRedirection();
-            app.Use(async (context, next) =>
-            {
-                context.Response.Headers.Add("Content-Security-Policy",
-                    "default-src 'self'; script-src 'self' https://ajax.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'");
-                await next();
-            });
+            //app.Use(async (context, next) =>
+            //{
+            //    context.Response.Headers.Add("Content-Security-Policy",
+            //        "default-src 'self'; script-src 'self' https://ajax.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'");
+            //    await next();
+            //});
 
 
             app.UseEndpoints(endpoints =>
