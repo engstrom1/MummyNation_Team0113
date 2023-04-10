@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MummyNation_Team0113.Models;
+using MummyNation_Team0113.Models.ViewModels;
 
 namespace MummyNation_Team0113.Controllers
 {
@@ -11,7 +11,7 @@ namespace MummyNation_Team0113.Controllers
     {
         public IActionResult DisplayData()
         {
-            return View();
+            return View(new DisplayDataViewModel());
         }
     }
 }
