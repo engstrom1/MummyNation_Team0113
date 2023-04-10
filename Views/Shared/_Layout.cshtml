@@ -44,7 +44,7 @@
     <div class="container d-flex align-items-center justify-content-between position-relative">
 
       <div class="logo">
-        <h1 class="text-light"><a href="index.html"><span>Squadfree</span></a></h1>
+                <h1 class="text-light"><a sp-controller="Home" asp-action="Index"><span>BYU Mummy Project</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="~/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
@@ -53,11 +53,12 @@
         
         <ul>
           <li><a class="nav-link scrollto active" asp-controller="Home" asp-action="Index">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">Burial Summary</a></li>
-          <li><a class="nav-link scrollto" href="#services">Supervised</a></li>
-          <li><a class="nav-link scrollto" href="#portfolio">Unsupervised</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li><a class="nav-link scrollto" asp-controller="Search" asp-action="Search">Search</a></li>
+                    <li><a class="nav-link scrollto" asp-controller="Home" asp-action="Index" asp-fragment="about">About</a></li>
+                    <li><a class="nav-link scrollto" asp-controller="Home" asp-action="Index" asp-fragment="services">Services</a></li>
+                    <li><a class="nav-link scrollto" asp-controller="Home" asp-action="Index" asp-fragment="portfolio">Unsupervised</a></li>
+                    <li><a class="nav-link scrollto" asp-controller="Home" asp-action="Index" asp-fragment="team">Team</a></li>
+          <li><a class="nav-link scrollto" asp-controller="Search" asp-action="Search">Display Data</a></li>
+          <li><a class="nav-link scrollto" asp-controller="Home" asp-action="Supervised">Predict Gender</a></li>
           <li class="dropdown"><a href="#"><span>More</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a asp-controller="Home" asp-action="Privacy">Privacy Policy</a></li>
