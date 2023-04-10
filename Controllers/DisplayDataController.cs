@@ -7,9 +7,9 @@ using MummyNation_Team0113.Models;
 
 namespace MummyNation_Team0113.Controllers
 {
-    public class SearchController : Controller
+    public class DisplayDataController : Controller
     {
-        public IActionResult Search()
+        public IActionResult DisplayData()
         {
             return View();
         }

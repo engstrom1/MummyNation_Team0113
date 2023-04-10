@@ -49,6 +49,7 @@ namespace MummyNation_Team0113
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireDigit = true;
             });
+            services.AddControllersWithViews();
         }
 
 
