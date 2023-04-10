@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using MummyNation_Team0113.Models
+using MummyNation_Team0113.Models;
 
 namespace MummyNation_Team0113.Controllers
 {
