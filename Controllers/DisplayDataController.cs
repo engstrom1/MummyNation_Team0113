@@ -3,15 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MummyNation_Team0113.Models;
+using MummyNation_Team0113.Models.ViewModels;
 
 namespace MummyNation_Team0113.Controllers
 {
-    public class SearchController : Controller
+    public class DisplayDataController : Controller
     {
-        public IActionResult Search()
+        public IActionResult DisplayData()
         {
-            return View();
+            return View(new DisplayDataViewModel());
         }
     }
 }

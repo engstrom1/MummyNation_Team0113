@@ -49,6 +49,7 @@ namespace MummyNation_Team0113
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireDigit = true;
             });
+            services.AddControllersWithViews();
         }
 
 
@@ -88,6 +89,9 @@ namespace MummyNation_Team0113
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "display",
+                    pattern: "{controller=DisplayData}/{action=DisplayData}");
                 endpoints.MapRazorPages();
             });
         }

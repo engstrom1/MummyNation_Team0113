@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MummyNation_Team0113.Models.ViewModels
 {
-    public class BurialViewModel
+    public class DisplayDataViewModel
     {
         public IQueryable<Burialmain> Burials { get; set; }
 

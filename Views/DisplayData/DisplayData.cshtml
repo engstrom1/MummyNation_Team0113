@@ -1,0 +1,10 @@
+﻿@*
+*@
+@{
+}
+@model BurialViewModel
+
+@foreach (Burialmain b in Model.Burials)
+{
+    <partial name="MummySummary" model="b"/>
+}
