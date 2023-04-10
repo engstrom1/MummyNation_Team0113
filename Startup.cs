@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Npgsql;
 
 namespace MummyNation_Team0113
 {
@@ -28,12 +29,16 @@ namespace MummyNation_Team0113
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("PostgreSQLConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+            //services.AddScoped<IBookProjectRepository, EFBookProjectRepository>(); // each http request gets its own repository?
+            //services.AddScoped<IPurchaseRepository, EFPurchaseRepository>();
             services.AddHsts(options =>
             {
                 options.IncludeSubDomains = true;
@@ -46,6 +51,7 @@ namespace MummyNation_Team0113
                 options.Password.RequireDigit = true;
             });
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -70,6 +76,7 @@ namespace MummyNation_Team0113
             app.UseAuthorization();
             app.UseHsts();
             app.UseHttpsRedirection();
+
 
             app.UseEndpoints(endpoints =>
             {

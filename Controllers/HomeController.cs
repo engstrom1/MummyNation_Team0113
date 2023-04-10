@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using MummyNation_Team0113.Models
 
 namespace MummyNation_Team0113.Controllers
 {
@@ -27,6 +28,27 @@ namespace MummyNation_Team0113.Controllers
         {
             return View();
         }
+
+        public IActionResult Confirmation()
+        {
+            return View();
+        }
+
+        public IActionResult Supervised()
+        {
+            return View();
+        }
+
+        public IActionResult Unsupervised()
+        {
+            return View();
+        }
+
+        public IActionResult BurialSummaryAll()
+        {
+            return View();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
