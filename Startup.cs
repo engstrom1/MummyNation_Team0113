@@ -91,8 +91,11 @@ namespace MummyNation_Team0113
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
-                    name: "display",
+                    name: "Display",
                     pattern: "{controller=DisplayData}/{action=DisplayData}");
+                endpoints.MapControllerRoute(
+                    name: "Admin",
+                    pattern: "{controller=AdminAccess}/{action=Roles}");
                 endpoints.MapRazorPages();
             });
         }
