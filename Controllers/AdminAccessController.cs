@@ -24,7 +24,7 @@ namespace MummyNation_Team0113.Controllers
         private readonly Dictionary<string, string> _roles;
         private readonly Dictionary<string, string> _claimTypes;
 
-        public AdminAccessController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, ILogger<HomeController> logger)
+        public AdminAccessController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, ILogger<AdminAccessController> logger)
         {
             _userManager = userManager;
             _roleManager = roleManager;

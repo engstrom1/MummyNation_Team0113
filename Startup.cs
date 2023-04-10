@@ -33,7 +33,6 @@ namespace MummyNation_Team0113
                     Configuration.GetConnectionString("PostgreSQLConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddDistributedMemoryCache();
             services.AddSession();
