@@ -37,19 +37,6 @@ namespace MummyNation_Team0113.Controllers
             return View();
         }
 
-        public IActionResult Unsupervised()
-        {
-            return View();
-        }
-
-        public IActionResult BurialSummaryAll()
-        {
-            return View();
-        }
-        public IActionResult DisplayData()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
