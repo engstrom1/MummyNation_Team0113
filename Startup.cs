@@ -30,15 +30,15 @@ namespace MummyNation_Team0113
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<MummyContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("PostgreSQLConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<MummyContext>();
             services.AddRazorPages();
             services.AddDistributedMemoryCache();
             services.AddSession();
-            //services.AddScoped<IBookProjectRepository, EFBookProjectRepository>(); // each http request gets its own repository?
+            services.AddScoped<IMummyNation_Team0113Repository, EFMummyNation_Team0113Repository>(); // each http request gets its own repository?
             //services.AddScoped<IPurchaseRepository, EFPurchaseRepository>();
             services.AddHsts(options =>
             {
@@ -107,8 +107,11 @@ namespace MummyNation_Team0113
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
-                    name: "display",
+                    name: "Display",
                     pattern: "{controller=DisplayData}/{action=DisplayData}");
+                endpoints.MapControllerRoute(
+                    name: "Admin",
+                    pattern: "{controller=AdminAccess}/{action=Roles}");
                 endpoints.MapRazorPages();
             });
         }
