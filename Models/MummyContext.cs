@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace MummyNation_Team0113.Models
 {
-    public partial class MummyContext : IdentityDbContext<IdentityUser>
+    public partial class MummyContext : DbContext
     {
         public MummyContext()
         {

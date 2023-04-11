@@ -17,7 +17,7 @@ namespace MummyNation_Team0113.Components
 
             public IViewComponentResult Invoke()
             {
-                ViewBag.Selected = RouteData?.Values["year"];
+                ViewBag.Selected = RouteData?.Values["data"];
             var data = new Dictionary<string, List<string>>();
 
             var year = repo.burialmain
@@ -26,7 +26,16 @@ namespace MummyNation_Team0113.Components
                 .OrderBy(x => x)
                 .ToList();
 
+            var gender = repo.burialmain
+             .Select(x => x.Sex)
+             .Distinct()
+             .OrderBy(x => x)
+             .ToList();
+
             data["year"] = year;
+
+            data["gender"] = gender;
+
             return View(data);
             }
         }
