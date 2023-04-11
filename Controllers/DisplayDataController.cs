@@ -16,15 +16,16 @@ namespace MummyNation_Team0113.Controllers
         {
             repo = temp;
         }
-        public IActionResult DisplayData()
+        public IActionResult DisplayData(string year)
         {
             var x = new DisplayDataViewModel
             {
                 burialmain = repo.burialmain
-                
+                .Where(x => x.Fieldbookexcavationyear == year || year == null)
+                .OrderBy(x => x.Id)
             };
 
-            return View(x);
+            return View("DisplayData", x);
         }
     }
 }

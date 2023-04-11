@@ -94,6 +94,18 @@ namespace MummyNation_Team0113
                     name: "Display",
                     pattern: "{controller=DisplayData}/{action=DisplayData}");
                 endpoints.MapControllerRoute(
+                    name: "yearpage", 
+                    pattern: "{year}/Page{pageNum}",
+                    new { Controller = "DisplayData", action = "DisplayData" });
+                endpoints.MapControllerRoute(
+                    name: "paging", 
+                    pattern: "Page{pageNum}", 
+                    new { Controller = "DisplayData", action = "DisplayData" });
+                endpoints.MapControllerRoute(
+                    name: "year", 
+                    pattern: "{year}", 
+                    new { Controller = "DisplayData", action = "DisplayData", pageNum = 1 });
+                endpoints.MapControllerRoute(
                     name: "Admin",
                     pattern: "{controller=AdminAccess}/{action=Roles}");
                 endpoints.MapRazorPages();
