@@ -17,14 +17,17 @@ namespace MummyNation_Team0113.Controllers
         {
             repo = temp;
         }        
-        public IActionResult DisplayData(string year, int pageNum = 1)
+        public IActionResult DisplayData(string data, int pageNum = 1)
         {
             int pageSize = 10;
 
             var x = new DisplayDataViewModel
             {
                 burialmain = repo.burialmain
-                .Where(b => b.Fieldbookexcavationyear == year || year == null)
+                .Where(b => (b.Fieldbookexcavationyear == data || b.Sex == data || data == null))
+                //.Where(b => (b.Fieldbookexcavationyear == data || b.Sex == data || data == null) && !(data == "M" && b.Sex != "M"))
+                //.OrderBy(b => b.Sex == null)
+                //.ThenBy(b => b.Fieldbookexcavationyear == null)
                 .OrderBy(b => b.Burialid)
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize),
@@ -40,9 +43,11 @@ namespace MummyNation_Team0113.Controllers
 
             return View("DisplayData", x);
         }
-        public IActionResult MummySummary()
+        public IActionResult MummySummary(long bm)
         {
-            return View();
+            ViewData["BmId"] = bm;
+            Console.Write(bm);
+            return View("MummySummary");
         }
     }
 }

@@ -109,16 +109,16 @@ namespace MummyNation_Team0113
                     name: "Display",
                     pattern: "{controller=DisplayData}/{action=DisplayData}");
                 endpoints.MapControllerRoute(
-                    name: "yearpage", 
-                    pattern: "{year}/Page{pageNum}",
+                    name: "datapage", 
+                    pattern: "{data}/Page{pageNum}",
                     new { Controller = "DisplayData", action = "DisplayData" });
                 endpoints.MapControllerRoute(
                     name: "paging", 
                     pattern: "Page{pageNum}", 
                     new { Controller = "DisplayData", action = "DisplayData" });
                 endpoints.MapControllerRoute(
-                    name: "year", 
-                    pattern: "{year}", 
+                    name: "data", 
+                    pattern: "{data}", 
                     new { Controller = "DisplayData", action = "DisplayData", pageNum = 1 });
                 endpoints.MapControllerRoute(
                     name: "Admin",

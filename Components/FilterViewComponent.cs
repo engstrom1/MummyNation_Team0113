@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MummyNation_Team0113.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 
@@ -16,12 +17,26 @@ namespace MummyNation_Team0113.Components
 
             public IViewComponentResult Invoke()
             {
-                ViewBag.Selected = RouteData?.Values["year"];
+                ViewBag.Selected = RouteData?.Values["data"];
+            var data = new Dictionary<string, List<string>>();
+
             var year = repo.burialmain
                 .Select(x => x.Fieldbookexcavationyear)
                 .Distinct()
-                .OrderBy(x => x);
-            return View(year);
+                .OrderBy(x => x)
+                .ToList();
+
+            var gender = repo.burialmain
+             .Select(x => x.Sex)
+             .Distinct()
+             .OrderBy(x => x)
+             .ToList();
+
+            data["year"] = year;
+
+            data["gender"] = gender;
+
+            return View(data);
             }
         }
     }

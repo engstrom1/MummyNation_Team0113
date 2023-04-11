@@ -1,1 +1,38 @@
-﻿<h2>Bop</h2>
+﻿@{
+            var bmId = ViewData["BmId"] as long?;
+            var dbContext = new MummyContext();
+
+            var burialmain = dbContext.Burialmain.Find(bmId);
+            var burialmainCranium = dbContext.BurialmainCranium.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
+            var cranium = dbContext.Cranium.FirstOrDefault(c => c.Id == burialmainCranium.MainCraniumid);
+            var dataList = new List<BurialClass>
+{
+        new BurialClass
+        {
+
+            Area = burialmain.Area,
+            InterorbitalBreadth = (decimal) cranium.InterorbitalBreadth,
+            
+            
+        }
+    };
+
+}
+<h2>Bop</h2>
+<h2>@bmId</h2>
+<h2>Burialmain ID: @burialmain.Id</h2>
+<p>Area: @burialmain.Area</p>
+<p>AlphaCore @cranium.InterorbitalBreadth</p>
+
+@foreach (var data in dataList)
+{
+    @foreach (var property in typeof(BurialClass).GetProperties())
+    {
+        
+        <h1>@property.Name</h1>
+        
+    }
+    <h1>Breadth: @data.InterorbitalBreadth</h1>
+
+}
+
