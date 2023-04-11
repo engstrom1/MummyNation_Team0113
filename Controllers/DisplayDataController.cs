@@ -43,9 +43,11 @@ namespace MummyNation_Team0113.Controllers
 
             return View("DisplayData", x);
         }
-        public IActionResult MummySummary()
+        public IActionResult MummySummary(long bm)
         {
-            return View();
+            ViewData["BmId"] = bm;
+            Console.Write(bm);
+            return View("MummySummary");
         }
     }
 }
