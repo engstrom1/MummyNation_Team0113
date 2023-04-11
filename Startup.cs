@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Npgsql;
+using System.Security.Claims;
 
 namespace MummyNation_Team0113
 {
@@ -51,6 +52,11 @@ namespace MummyNation_Team0113
                 options.Password.RequireDigit = true;
             });
             services.AddControllersWithViews();
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseFileContextDatabase());
+
+            //services.AddDefaultIdentity<ApplicationUser>()
+            //    .AddRoles<ApplicationRole>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
         }
 
 
@@ -85,14 +91,18 @@ namespace MummyNation_Team0113
             //});
 
 
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
-                    name: "display",
+                    name: "Display",
                     pattern: "{controller=DisplayData}/{action=DisplayData}");
+                endpoints.MapControllerRoute(
+                    name: "Admin",
+                    pattern: "{controller=AdminAccess}/{action=Roles}");
                 endpoints.MapRazorPages();
             });
         }

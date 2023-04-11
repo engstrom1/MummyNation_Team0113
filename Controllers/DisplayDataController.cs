@@ -16,11 +16,23 @@ namespace MummyNation_Team0113.Controllers
         {
             repo = temp;
         }
-        public IActionResult DisplayData()
+        public IActionResult DisplayData(int pageNum = 1)
         {
+            int pageSize = 10;
+
             var x = new DisplayDataViewModel
             {
                 burialmain = repo.burialmain
+                .OrderBy(b => b.Burialid)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
+                PageInfo = new PageInfo
+                {
+                    TotalNumBurials = repo.burialmain.Count(),
+                    BurialsPerPage = pageSize,
+                    CurrentPage = pageNum
+                    
+                }
                 
             };
 

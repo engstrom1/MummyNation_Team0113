@@ -11,7 +11,8 @@
 
   <!-- Favicons -->
   <link href="~/img/favicon.png" rel="icon">
-  <link href="~/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="~/img/apple-touch-icon.png" rel="apple-touch-icon
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -63,7 +64,7 @@
             <ul>
               <li><a asp-controller="Home" asp-action="Privacy">Privacy Policy</a></li>
               <li><a asp-controller="AdminAccess" asp-action="Roles">Roles</a></li>
-              <li><a href="#">Users</a></li>
+              <li><a asp-controller="AdminAccess" asp-action="Users">Users</a></li>
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li>
@@ -179,7 +180,7 @@
           },
           "theme": "classic",
           "content": {
-            "href": "@Url.Action("Privacy", "HomeController")"
+            "href": "@Url.Action("Privacy", "Home")"
           }
         });
     </script>
