@@ -16,14 +16,15 @@ namespace MummyNation_Team0113.Controllers
         public DisplayDataController(IMummyNation_Team0113Repository temp)
         {
             repo = temp;
-        }
-        public IActionResult DisplayData(int pageNum = 1)
+        }        
+        public IActionResult DisplayData(string year, int pageNum = 1)
         {
             int pageSize = 10;
 
             var x = new DisplayDataViewModel
             {
                 burialmain = repo.burialmain
+                .Where(b => b.Fieldbookexcavationyear == year || year == null)
                 .OrderBy(b => b.Burialid)
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize),
@@ -37,7 +38,7 @@ namespace MummyNation_Team0113.Controllers
                 
             };
 
-            return View(x);
+            return View("DisplayData", x);
         }
     }
 }

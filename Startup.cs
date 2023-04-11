@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Npgsql;
+using System.Security.Claims;
 
 namespace MummyNation_Team0113
 {
@@ -51,6 +52,11 @@ namespace MummyNation_Team0113
                 options.Password.RequireDigit = true;
             });
             services.AddControllersWithViews();
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseFileContextDatabase());
+
+            //services.AddDefaultIdentity<ApplicationUser>()
+            //    .AddRoles<ApplicationRole>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
         }
 
 
@@ -85,6 +91,7 @@ namespace MummyNation_Team0113
             //});
 
 
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -93,6 +100,18 @@ namespace MummyNation_Team0113
                 endpoints.MapControllerRoute(
                     name: "Display",
                     pattern: "{controller=DisplayData}/{action=DisplayData}");
+                endpoints.MapControllerRoute(
+                    name: "yearpage", 
+                    pattern: "{year}/Page{pageNum}",
+                    new { Controller = "DisplayData", action = "DisplayData" });
+                endpoints.MapControllerRoute(
+                    name: "paging", 
+                    pattern: "Page{pageNum}", 
+                    new { Controller = "DisplayData", action = "DisplayData" });
+                endpoints.MapControllerRoute(
+                    name: "year", 
+                    pattern: "{year}", 
+                    new { Controller = "DisplayData", action = "DisplayData", pageNum = 1 });
                 endpoints.MapControllerRoute(
                     name: "Admin",
                     pattern: "{controller=AdminAccess}/{action=Roles}");
