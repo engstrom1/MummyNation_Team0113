@@ -36,8 +36,10 @@ namespace MummyNation_Team0113
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultUI()
+                .AddDefaultTokenProviders();
             services.AddRazorPages();
             services.AddDistributedMemoryCache();
             services.AddSession();
@@ -120,7 +122,7 @@ namespace MummyNation_Team0113
                     new { Controller = "DisplayData", action = "DisplayData", pageNum = 1 });
                 endpoints.MapControllerRoute(
                     name: "Admin",
-                    pattern: "{controller=AdminAccess}/{action=Roles}");
+                    pattern: "{controller=RoleManager}/{action=Roles}");
                 endpoints.MapRazorPages();
             });
         }

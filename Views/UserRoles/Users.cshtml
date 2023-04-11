@@ -1,0 +1,46 @@
+@using MummyNation_Team0113.Models
+@model List<MummyNation_Team0113.Models.UserRolesViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    body {
+      padding-top: 150px;
+      background-color: #F2D492;
+      color: white;
+    }
+</style>
+
+<div style="padding-left:50px;">
+    <div class="row"  style="padding-bottom: 75px;">
+        <h1>User Roles</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th>Delete User</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                <tr>
+                    <td>@user.Email</td>
+                    <td>@string.Join(" , ", user.Roles.ToList())</td>
+                    <td>
+                        <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Manage" asp-route-userId="@user.UserId">Manage Roles</a>
+                    </td>
+                     <td>
+                        <form method="post" asp-controller="UserRoles" asp-action="Delete">
+                            <input type="hidden" name="userId" value="@user.UserId" />
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

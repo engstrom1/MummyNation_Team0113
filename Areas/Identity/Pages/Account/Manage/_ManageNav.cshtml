@@ -1,4 +1,5 @@
-﻿@inject SignInManager<IdentityUser> SignInManager
+﻿@using MummyNation_Team0113.Models
+@inject SignInManager<ApplicationUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
