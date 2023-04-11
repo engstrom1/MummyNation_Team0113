@@ -18,10 +18,10 @@ namespace MummyNation_Team0113.Components
             {
                 ViewBag.Selected = RouteData?.Values["year"];
             var year = repo.burialmain
-                .Select(x => x.Fieldbookexcavationyear);
-                    //.Distinct()
-                    //.OrderBy(x => x);
-                return View(year);
+                .Select(x => x.Fieldbookexcavationyear)
+                .Distinct()
+                .OrderBy(x => x);
+            return View(year);
             }
         }
     }

@@ -15,7 +15,8 @@ namespace MummyNation_Team0113.Controllers
         public DisplayDataController(IMummyNation_Team0113Repository temp)
         {
             repo = temp;
-        }        public IActionResult DisplayData(int pageNum = 1, string year)
+        }        
+        public IActionResult DisplayData(string year, int pageNum = 1)
         {
             int pageSize = 10;
 
