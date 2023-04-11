@@ -1,4 +1,6 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -8,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace MummyNation_Team0113.Models
 {
-    public partial class MummyContext : DbContext
+    public partial class MummyContext : IdentityDbContext<IdentityUser>
     {
         public MummyContext()
         {

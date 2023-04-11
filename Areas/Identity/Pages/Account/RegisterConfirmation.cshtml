@@ -1,0 +1,34 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register confirmation";
+}
+<style>
+    body {
+      padding-top: 150px;
+      background-color: #283845;
+      color: white;
+    }
+</style>
+
+<div style="padding-left:50px;">
+    <h1>@ViewData["Title"]</h1>
+
+    <div class="row"  style="padding-bottom: 75px;">
+        @{
+            if (@Model.DisplayConfirmAccountLink)
+            {
+                <p>
+                    This app does not currently have a real email sender registered, see <a href="https://aka.ms/aspaccountconf">these docs</a> for how to configure a real email sender.
+                    Normally this would be emailed: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Click here to confirm your account</a>
+                </p>
+            }
+            else
+            {
+                 <p>
+                    Please check your email to confirm your account.
+                 </p>
+            }
+        }
+     </div>
+</div>
