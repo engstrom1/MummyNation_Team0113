@@ -4,13 +4,23 @@
 }
 @model DisplayDataViewModel
 
-@foreach (var b in Model.burialmain)
-{
-    <partial name="MummySummary" model="b"/>
-}
+<style>
+    body {
+      padding-top: 150px;
+      background-color: #283845;
+      color: white;
+    }
+</style>
 
-<div page-model="@Model.PageInfo" page-action="DisplayData"></div>
+<div class="row"  style="padding-bottom: 75px;">
+    @foreach (var b in Model.burialmain)
+    {
+        <partial name="MummySummary" model="b"/>
+    }
 
-<br />
-<br />
-<br />
+    <div page-model="@Model.PageInfo" page-action="DisplayData"></div>
+
+    <br />
+    <br />
+    <br />
+</div>

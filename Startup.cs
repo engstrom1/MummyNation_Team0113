@@ -33,8 +33,11 @@ namespace MummyNation_Team0113
             services.AddDbContext<MummyContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("PostgreSQLConnection")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<MummyContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
             services.AddDistributedMemoryCache();
             services.AddSession();
@@ -48,10 +51,13 @@ namespace MummyNation_Team0113
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequiredLength = 10;
-                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
             });
             services.AddControllersWithViews();
+
             //services.AddDbContext<ApplicationDbContext>(options => options.UseFileContextDatabase());
 
             //services.AddDefaultIdentity<ApplicationUser>()
