@@ -1,0 +1,27 @@
+﻿@model Burialmain
+<div class="card card-outline-primary m-1 p-1">
+    <div class="bg-faded p-1">
+
+
+        <h4>@Model.Area</h4>
+    </div>
+
+    <ul>
+        <li>Date: @Model.Dateofexcavation</li>
+        <li>Sex: @Model.Sex</li>
+        <li>Age at Death: @Model.Ageatdeath</li>
+        <li>Fieldbook Excavation Year: @Model.Fieldbookexcavationyear</li>
+        <li>Fieldbook Page: @Model.Fieldbookpage</li>
+        <li>Text: @Model.Text</li>
+    </ul>
+
+    <form method="post" asp-page="/MummySummary">
+        <input type="hidden" asp-for="@Model.Burialid" />
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+        <span class="card-text">
+            <button type="submit" class="btn btn-success btn-sm float-end">View Mummy</button>
+        </span>
+    </form>
+
+
+</div>
