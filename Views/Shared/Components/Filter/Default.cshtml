@@ -1,0 +1,12 @@
+﻿@model IEnumerable<string>
+<div class="row">
+    <div class="col gap-4">
+        <a asp-controller="DisplayData" asp-action="DisplayData" asp-route-year="" class="mt-1 btn btn-sm btn-outline-secondary">Home</a>
+
+        @foreach (string t in Model)
+        {
+            <a asp-controller="DisplayData" asp-action="DisplayData" asp-route-year="@t"
+               class="btn @(ViewBag.Selected == t ? "btn-primary btn-sm mt-1" : "btn-sm btn-outline-secondary mt-1")">@t</a>
+        }
+    </div>
+</div>
