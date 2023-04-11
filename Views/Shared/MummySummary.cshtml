@@ -5,19 +5,17 @@
 
             
             <h4>@Model.Area</h4>
-
-            <span class="badge bg-info" style="float:right">
-                Date: $@Model.Dateofexcavation
-            </span>
         </div>
 
         <ul>
+            <li>Date: @Model.Dateofexcavation</li>
             <li>Sex: @Model.Sex</li>
             <li>Age at Death: @Model.Ageatdeath</li>
             <li>Fieldbook Excavation Year: @Model.Fieldbookexcavationyear</li>
             <li>Fieldbook Page: @Model.Fieldbookpage</li>
             <li>Text: @Model.Text</li>
         </ul>
+
 
         @*<form method="post" asp-page="/Shop">
                 <input type="hidden" asp-for="@Model.BookId" />

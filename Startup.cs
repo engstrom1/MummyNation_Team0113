@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Npgsql;
+using System.Security.Claims;
 
 namespace MummyNation_Team0113
 {
@@ -51,6 +52,11 @@ namespace MummyNation_Team0113
                 options.Password.RequireDigit = true;
             });
             services.AddControllersWithViews();
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseFileContextDatabase());
+
+            //services.AddDefaultIdentity<ApplicationUser>()
+            //    .AddRoles<ApplicationRole>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
         }
 
 
@@ -83,6 +89,7 @@ namespace MummyNation_Team0113
             //        "default-src 'self'; script-src 'self' https://ajax.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'");
             //    await next();
             //});
+
 
 
             app.UseEndpoints(endpoints =>
