@@ -15,7 +15,7 @@
         <li>Text: @Model.Text</li>
     </ul>
 
-    <form method="post" asp-page="/MummySummary">
+    <form method="post" asp-controller="DisplayData" asp-action="MummySummary">
         <input type="hidden" asp-for="@Model.Burialid" />
         <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
         <span class="card-text">

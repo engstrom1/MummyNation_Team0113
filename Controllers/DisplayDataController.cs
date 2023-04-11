@@ -40,5 +40,9 @@ namespace MummyNation_Team0113.Controllers
 
             return View("DisplayData", x);
         }
+        public IActionResult MummySummary()
+        {
+            return View();
+        }
     }
 }
