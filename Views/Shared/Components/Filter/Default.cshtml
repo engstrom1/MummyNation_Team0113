@@ -1,44 +1,5 @@
 ﻿
 @model Dictionary<string, List<string>>
-@*<div class="col-3">*@
-   @* <div class="accordion" id="accordionFilter">
-                    @foreach (var item in Model)
-                    {
-                        <div class="card">
-                            <div class="card-header" id="heading@(item.Key)">
-                                <h2 class="mb-0">
-                                    <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#collapse@(item.Key)" aria-expanded="true" aria-controls="collapse@(item.Key)">
-                            @{
-                                var titleCase = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(item.Key.ToLower());
-                            }
-
-                            Filter By @titleCase
-                                    </button>
-                                </h2>
-                            </div>
-                <div id="collapse@(item.Key)" class="collapse" aria-labelledby="heading@(item.Key)" data-bs-parent="#accordionFilter">
-                        <div class="card-body">
-                            <div>
-                                <div class="row">
-                                    <div class="col gap-4">
-                                        <a asp-controller="DisplayData" asp-action="DisplayData" asp-route-data="" class="mt-1 btn btn-sm btn-outline-secondary">Home</a>
-
-                                    @foreach (string t in item.Value)
-                                        {
-                                            <a asp-controller="DisplayData" asp-action="DisplayData" asp-route-data="@t"
-                                               class="btn @(ViewBag.Selected == t ? "btn-primary btn-sm mt-1" : "btn-sm btn-outline-secondary mt-1")">@t</a>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-            </div>
-  }*@
-
-@*            </div>
-        </div>
-*@
 
 <div class="accordion" id="accordionFilter">
     <div class="card">
@@ -54,7 +15,17 @@
                                     <option value="">Select an option</option>
                                     @foreach (string t in item.Value)
                                     {
-                                        <option value="@t">@t</option>
+                                        if (t == "")
+                                        {
+                                            break;
+                                        }
+                                        else if (t == "N LL")
+                                        {
+                                            <option value="@t">NULL</option>
+                                        }
+                                        {
+                                            <option value="@t">@t</option>
+                                        }
                                     }
                                 </select>
                             </div>
