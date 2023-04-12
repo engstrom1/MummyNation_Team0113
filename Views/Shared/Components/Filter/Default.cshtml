@@ -1,7 +1,7 @@
 ﻿
 @model Dictionary<string, List<string>>
-<div class="col-3">
-    <div class="accordion" id="accordionFilter">
+@*<div class="col-3">*@
+   @* <div class="accordion" id="accordionFilter">
                     @foreach (var item in Model)
                     {
                         <div class="card">
@@ -34,7 +34,42 @@
                         </div>
                 </div>
             </div>
-  }
+  }*@
 
+@*            </div>
+        </div>
+*@
+
+<div class="accordion" id="accordionFilter">
+    <div class="card">
+        <div id="collapseFilter" class="collapse" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
+            <div class="card-body">
+                <form method="POST" action="@Url.Action("DisplayData", "DisplayData")">
+                    <div class="row">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-md-4 mb-3">
+                                <h4>@item.Key</h4>
+                                <select class="form-select" name="@item.Key" id="@item.Key" aria-label="@item.Key">
+                                    <option value="">Select an option</option>
+                                    @foreach (string t in item.Value)
+                                    {
+                                        <option value="@t">@t</option>
+                                    }
+                                </select>
+                            </div>
+                        }
+                    </div>
+                    <div class="text-end mt-3">
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
+</div>
+
+<button class="btn btn-outline-secondary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
+    <span class="bi bi-funnel"></span> Filter Options
+</button>
+
