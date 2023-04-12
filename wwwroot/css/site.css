@@ -500,7 +500,7 @@ section {
 }
 
 .section-bg {
-  background-color: #f4f9fc;
+    background-color: #FBF1DA;
 }
 
 .section-title {
@@ -799,7 +799,7 @@ section {
 # Cta
 --------------------------------------------------------------*/
 .cta {
-  background: linear-gradient(rgba(103, 176, 209, 0.8), rgba(103, 176, 209, 0.8)), url("../img/cta-bg.jpg") fixed center center;
+  background: linear-gradient(rgba(103, 176, 209, 0.5), rgba(103, 176, 209, 0.5)), url("../img/cta-bg.jpg") fixed center center;
   background-size: cover;
   padding: 60px 0;
 }
@@ -1039,8 +1039,8 @@ section {
 
 .testimonials .testimonial-item .quote-icon-left,
 .testimonials .testimonial-item .quote-icon-right {
-  color: #d5e9f2;
-  font-size: 26px;
+    color: #F2D492;
+    font-size: 26px;
 }
 
 .testimonials .testimonial-item .quote-icon-left {
@@ -1085,15 +1085,15 @@ section {
 }
 
 .testimonials .swiper-pagination .swiper-pagination-bullet {
-  width: 12px;
-  height: 12px;
-  background-color: #fff;
-  opacity: 1;
-  border: 1px solid #67b0d1;
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    opacity: 1;
+    border: 1px solid #F19455;
 }
 
 .testimonials .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #67b0d1;
+    background-color: #F19455;
 }
 
 /*--------------------------------------------------------------

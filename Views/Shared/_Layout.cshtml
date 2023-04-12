@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Squadfree Bootstrap Template - Index</title>
+  <title>Mummy Nation</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -44,7 +44,7 @@
     <div class="container d-flex align-items-center justify-content-between position-relative">
 
       <div class="logo">
-                <h1 class="text-light"><a sp-controller="Home" asp-action="Index"><span>BYU Mummy Project</span></a></h1>
+                <h1 class="text-light"><a sp-controller="Home" asp-action="Index"><span>Mummy Nation</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="~/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
@@ -64,7 +64,6 @@
               <li><a asp-controller="Home" asp-action="Privacy">Privacy Policy</a></li>
               <li><a asp-controller="RoleManager" asp-action="Roles">Roles</a></li>
               <li><a asp-controller="UserRoles" asp-action="Users">Users</a></li>
-              <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li>
           <partial name="_LoginPartial" />
@@ -85,13 +84,13 @@
 
           <div class="col-lg-4 col-md-6">
             <div class="footer-info">
-              <h3>Squadfree</h3>
-              <p class="pb-3"><em>Qui repudiandae et eum dolores alias sed ea. Qui suscipit veniam excepturi quod.</em></p>
+              <h3>Mummy Nation</h3>
+              <p class="pb-3"><em>Uncovering the secrets of Fag el-Gamous</em></p>
               <p>
-                A108 Adam Street <br>
-                NY 535022, USA<br><br>
-                <strong>Phone:</strong> +1 5589 55488 55<br>
-                <strong>Email:</strong> info@example.com<br>
+                Brigham Young University <br>
+                Provo, UT 84602, USA<br><br>
+                <strong>Phone:</strong> +1 (801) 422-4285<br>
+                <strong>Email:</strong> mummynation@byu.edu<br>
               </p>
               <div class="social-links mt-3">
                 <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
@@ -106,28 +105,28 @@
           <div class="col-lg-2 col-md-6 footer-links">
             <h4>Useful Links</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Index">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Index" asp-fragment="about">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Index" asp-fragment="services">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Index" asp-fragment="team">Team</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Privacy">Privacy policy</a></li>
             </ul>
           </div>
 
           <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Our Services</h4>
+            <h4>Administration</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a asp-area="Identity" asp-page="/Account/Login">Log In</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a asp-area="Identity" asp-page="/Account/Manage/Index">Manage Account</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a asp-controller="UserRoles" asp-action="Users">Users</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a asp-controller="RoleManager" asp-action="Roles">Roles</a></li>
             </ul>
           </div>
 
           <div class="col-lg-4 col-md-6 footer-newsletter">
             <h4>Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+            <p>Get involved with the BYU excavation team at Fag el-Gamous.</p>
             <form action="" method="post">
               <input type="email" name="email"><input type="submit" value="Subscribe">
             </form>
@@ -140,14 +139,7 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Squadfree</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/squadfree-free-bootstrap-template-creative/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        &copy; Copyright <strong><span>Mummy Nation</span></strong>. All Rights Reserved
       </div>
     </div>
   </footer><!-- End Footer -->
