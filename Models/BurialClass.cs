@@ -7,6 +7,7 @@ namespace MummyNation_Team0113.Models
 {
     public class BurialClass
     {
+        public long Id { get; set; }
         public string Squarenorthsouth { get; set; }
         public string Headdirection { get; set; }
         public string Sex { get; set; }
@@ -40,6 +41,8 @@ namespace MummyNation_Team0113.Models
         public string Fieldbookexcavationyear { get; set; }
         public string Clusternumber { get; set; }
         //public string Shaftnumber { get; set; }
+
+        // Start getting textiles
         public string Locale { get; set; }
         public string Description { get; set; }
         public string Estimatedperiod { get; set; }

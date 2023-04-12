@@ -14,14 +14,14 @@
 <div class="row"  style="padding-bottom: 75px;">
     <vc:Filter></vc:Filter>
     <div class="col-9">
-@foreach (var b in Model.burialmain)
-{
-    <partial name="MummyCard" model="b"/>
-}
+        @foreach (var b in Model.burialmain)
+        {            
+            <partial name="MummyCard" model="b" />
+        }
         <div page-model="@Model.PageInfo" page-action="DisplayData"></div>
 
-    <br />
-    <br />
-    <br />
-</div>
+        <br />
+        <br />
+        <br />
+    </div>
 </div>

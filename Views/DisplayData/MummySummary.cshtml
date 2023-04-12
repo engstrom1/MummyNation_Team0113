@@ -4,7 +4,10 @@
     var burialmain = dbContext.Burialmain.Find(bmId);
     Cranium cranium = null;
     Textile textile = null;
+    List<Textile> textileList = new List<Textile>();
+    List<string> locale = new List<string>();
     var burialmainCranium = dbContext.BurialmainCranium.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
+
     if (burialmainCranium != null)
     {
         cranium = dbContext.Cranium.FirstOrDefault(c => c.Id == burialmainCranium.MainCraniumid);
@@ -13,7 +16,7 @@
     var burialmainTextile = dbContext.BurialmainTextile.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
     if (burialmainTextile != null)
     {
-        textile = dbContext.Textile.FirstOrDefault(t => t.Id == burialmainTextile.MainTextileid);
+        textileList = dbContext.Textile.Where(t => t.Id == burialmainTextile.MainTextileid).ToList();
     }
 
     var burialmainBodyanalysischart = dbContext.BurialmainBodyanalysischart.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
@@ -40,51 +43,62 @@
         var biological = dbContext.Biological.FirstOrDefault(c => c.Id == burialmainBiological.MainBiologicalid);
 
     }
+
+    foreach(var t in textileList)
+    {
+        if (t?.Locale != null)
+        {
+            locale.Add(t.Locale);
+        }
+    }
+
     var dataList = new List<BurialClass>
     {
         new BurialClass
         {
+            Id = burialmain.Id,
+            Squarenorthsouth = burialmain?.Squarenorthsouth ?? null,
+            Headdirection = burialmain?.Headdirection ?? null,
+            Sex = string.IsNullOrEmpty(burialmain.Sex) ? null : burialmain.Sex,
+            Northsouth = burialmain?.Northsouth ?? null,
+            Depth = burialmain?.Depth ?? null,
+            Eastwest = burialmain?.Eastwest ?? null,
+            Adultsubadult = burialmain?.Adultsubadult ?? null,
+            Facebundles = burialmain?.Facebundles ?? null,
+            Southtohead = burialmain?.Southtohead ?? null,
+            Preservation = burialmain?.Preservation ?? null,
+            Fieldbookpage = burialmain?.Fieldbookpage ?? null,
+            Squareeastwest = burialmain?.Squareeastwest ?? null,
+            Goods = burialmain?.Goods ?? null,
+            Text = burialmain?.Text ?? null,
+            Wrapping = burialmain?.Wrapping ?? null,
+            Haircolor = string.IsNullOrEmpty(burialmain.Haircolor) ? null : burialmain.Haircolor,
+            Westtohead = burialmain?.Westtohead ?? null,
+            Samplescollected = burialmain?.Samplescollected ?? null,
+            Area = burialmain?.Area ?? null,
+            Length = burialmain?.Length ?? null,
+            Burialnumber = burialmain?.Burialnumber ?? null,
+            Dataexpertinitials = burialmain?.Dataexpertinitials ?? null,
+            Westtofeet = burialmain?.Westtofeet ?? null,
+            Ageatdeath = burialmain?.Ageatdeath ?? null,
+            Southtofeet = burialmain?.Southtofeet ?? null,
+            //Excavationrecorder = burialmain?.Excavationrecorder ?? null,
+            //Photos = burialmain?.Photos ?? null,
+            //Hair = burialmain?.Hair ?? null,
+            //Burialmaterials = burialmain?.Burialmaterials ?? null,
+            //Dateofexcavation = burialmain?.Dateofexcavation ?? null,
+            Fieldbookexcavationyear = burialmain?.Fieldbookexcavationyear ?? null,
+            Clusternumber = burialmain?.Clusternumber ?? null,
+            //Shaftnumber = burialmain?.Shaftnumber ?? null,
 
-            Squarenorthsouth = burialmain.Squarenorthsouth,
-            Headdirection = burialmain.Headdirection,
-            Sex = burialmain.Sex,
-            Northsouth = burialmain.Northsouth,
-            Depth = burialmain.Depth,
-            Eastwest = burialmain.Eastwest,
-            Adultsubadult = burialmain.Adultsubadult,
-            Facebundles = burialmain.Facebundles,
-            Southtohead = burialmain.Southtohead,
-            Preservation = burialmain.Preservation,
-            Fieldbookpage = burialmain.Fieldbookpage,
-            Squareeastwest = burialmain.Squareeastwest,
-            Goods = burialmain.Goods,
-            Text = burialmain.Text,
-            Wrapping = burialmain.Wrapping,
-            Haircolor = burialmain.Haircolor,
-            Westtohead = burialmain.Westtohead,
-            Samplescollected = burialmain.Samplescollected,
-            Area = burialmain.Area,
-            Length = burialmain.Length,
-            Burialnumber = burialmain.Burialnumber,
-            Dataexpertinitials = burialmain.Dataexpertinitials,
-            Westtofeet = burialmain.Westtofeet,
-            Ageatdeath = burialmain.Ageatdeath,
-            Southtofeet = burialmain.Southtofeet,
-            //Excavationrecorder = burialmain.Excavationrecorder,
-            //Photos = burialmain.Photos,
-            //Hair = burialmain.Hair,
-            //Burialmaterials = burialmain.Burialmaterials,
-            //Dateofexcavation = burialmain.Dateofexcavation,
-            Fieldbookexcavationyear = burialmain.Fieldbookexcavationyear,
-            Clusternumber = burialmain.Clusternumber,
-            //Shaftnumber = burialmain.Shaftnumber,
-
-            Locale = textile?.Locale ?? "",
-            Description = textile?.Description ?? "",
-            Estimatedperiod = textile?.Estimatedperiod ?? "",
+            // Start doing the textiles
+            Locale = locale != null && locale.Count > 0 ? string.Join(" - ", locale) : null,
+            //Locale = textile?.Locale ?? "",
+            Description = textile?.Description ?? null,
+            Estimatedperiod = textile?.Estimatedperiod ?? null,
             Sampledate = textile?.Sampledate ?? null,
             Photographeddate = textile?.Photographeddate ?? null,
-            Direction = textile?.Direction ?? "",
+            Direction = textile?.Direction ?? null,
             InterorbitalBreadth = Math.Round((decimal) (cranium?.InterorbitalBreadth ?? 0),2),
 
 
@@ -96,36 +110,19 @@
 <br />
 <br />
 <br />
-<table class="table table-bordered table-striped">
-
-    <thead>
-        <tr>
-            @foreach (var property in typeof(BurialClass).GetProperties())
-            {
-                <th>
-                    @property.Name
-
-                </th>
-
-            }
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-
         @foreach (var data in dataList)
         {
             @foreach (var property in typeof(BurialClass).GetProperties())
             {
-                <td>@data.GetType().GetProperty(property.Name).GetValue(data, null)</td>
-
+                @if (data.GetType().GetProperty(property.Name).GetValue(data, null) != null) // only print if the data is not null
+                    {
+                        <h1>@property.Name: @data.GetType().GetProperty(property.Name).GetValue(data, null)</h1>
+                    }
             }
 
         }
-        </tr>
-    </tbody>
-
-</table>
+<br />
+      <h1>*Only the data we have is being displayed. Empty fields are filtered out</h1>
 <br />
 <br />
 <br />
