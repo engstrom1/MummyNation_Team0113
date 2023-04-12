@@ -44,7 +44,7 @@ namespace MummyNation_Team0113.Controllers
         public IActionResult MummySummary(long bm)
         {
             ViewData["BmId"] = bm;
-            Console.Write(bm);
+            
             return View("MummySummary");
         }
 
