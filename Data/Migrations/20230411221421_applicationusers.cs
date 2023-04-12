@@ -2,7 +2,7 @@
 
 namespace MummyNation_Team0113.Data.Migrations
 {
-    public partial class applicationusers : Migration
+    public partial class ApplicationUsers : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
