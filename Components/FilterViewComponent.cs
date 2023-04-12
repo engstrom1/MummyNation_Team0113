@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MummyNation_Team0113.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,7 +18,7 @@ namespace MummyNation_Team0113.Components
 
             public IViewComponentResult Invoke()
             {
-                ViewBag.Selected = RouteData?.Values["data"];
+            ViewBag.Selected = RouteData?.Values["data"];
             var data = new Dictionary<string, List<string>>();
 
             var year = repo.burialmain
@@ -32,8 +33,35 @@ namespace MummyNation_Team0113.Components
              .OrderBy(x => x)
              .ToList();
 
-            data["year"] = year;
+            var depth = repo.burialmain
+                .Select (x => x.Depth)
+                .Distinct()
+                .OrderBy(x => x)
+                .ToList();
 
+            var ageAtDeath = repo.burialmain
+                .Select( x => x.Ageatdeath)
+                .Distinct()
+                .OrderBy(x => x)
+                .ToList();
+
+            var headDirection = repo.burialmain
+                .Select(x => x.Headdirection)
+                .Distinct()
+                .OrderBy(x => x)
+                .ToList();
+
+            var hairColor = repo.burialmain
+                .Select(x => x.Haircolor)
+                .Distinct()
+                .OrderBy(x => x)
+                .ToList();
+
+            data["year"] = year;
+            data["hairColor"] = hairColor;
+            data["headDirection"] = headDirection;
+            data["ageAtDeath"] = ageAtDeath;
+            data["depth"] = depth;
             data["gender"] = gender;
 
             return View(data);
