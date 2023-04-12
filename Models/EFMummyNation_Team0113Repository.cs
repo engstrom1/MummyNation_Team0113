@@ -16,6 +16,12 @@ namespace MummyNation_Team0113.Models
         }
         public IQueryable<Burialmain> burialmain => context.Burialmain;
 
+        public IQueryable<Textilefunction> textilefunction => context.Textilefunction;
+
+        public IQueryable<Textile> textile => context.Textile;
+
+        public IQueryable<BurialmainTextile> Burialmaintextile => context.BurialmainTextile;
+
         
     }
 }
