@@ -77,9 +77,6 @@ namespace MummyNation_Team0113.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
 
@@ -91,8 +88,6 @@ namespace MummyNation_Team0113.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("UserId");
 
@@ -237,10 +232,6 @@ namespace MummyNation_Team0113.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.HasOne("MummyNation_Team0113.Models.ApplicationUser", null)
-                        .WithMany("Claims")
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("MummyNation_Team0113.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -259,7 +250,7 @@ namespace MummyNation_Team0113.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.HasOne("MummyNation_Team0113.Models.ApplicationUser", null)
-                        .WithMany("Roles")
+                        .WithMany("RolesList")
                         .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)

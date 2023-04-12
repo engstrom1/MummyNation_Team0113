@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using MummyNation_Team0113.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,8 +20,8 @@ namespace MummyNation_Team0113.Data
             //Seed Default User
             var defaultUser = new ApplicationUser
             {
-                UserName = "superadmin",
-                Email = "superadmin@gmail.com",
+                UserName = "pharaoh",
+                Email = "pharaoh@egypt.com",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true
             };
@@ -29,7 +30,7 @@ namespace MummyNation_Team0113.Data
                 var user = await userManager.FindByEmailAsync(defaultUser.Email);
                 if (user == null)
                 {
-                    await userManager.CreateAsync(defaultUser, "123Pa$$word.");
+                    await userManager.CreateAsync(defaultUser, "Mike&Ike123");
                     await userManager.AddToRoleAsync(defaultUser, Enums.Roles.Basic.ToString());
                     await userManager.AddToRoleAsync(defaultUser, Enums.Roles.Pharaoh.ToString());
                 }
