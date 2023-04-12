@@ -1,38 +1,73 @@
 ﻿@{
-            var bmId = ViewData["BmId"] as long?;
-            var dbContext = new MummyContext();
+    var bmId = ViewData["BmId"] as long?;
+    var dbContext = new MummyContext();
+    var burialmain = dbContext.Burialmain.Find(bmId);
+    Cranium cranium = null;
+    var burialmainCranium = dbContext.BurialmainCranium.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
+    if (burialmainCranium != null)
+    {
+        cranium = dbContext.Cranium.FirstOrDefault(c => c.Id == burialmainCranium.MainCraniumid);
+    }
 
-            var burialmain = dbContext.Burialmain.Find(bmId);
-            var burialmainCranium = dbContext.BurialmainCranium.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
-            var cranium = dbContext.Cranium.FirstOrDefault(c => c.Id == burialmainCranium.MainCraniumid);
-            var dataList = new List<BurialClass>
-{
+    var burialmainTextile = dbContext.BurialmainTextile.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
+    if (burialmainTextile != null)
+    {
+        var textile = dbContext.Textile.FirstOrDefault(t => t.Id == burialmainTextile.MainTextileid);
+    }
+
+    var burialmainBodyanalysischart = dbContext.BurialmainBodyanalysischart.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
+    if (burialmainBodyanalysischart != null)
+    {
+        var bodyanalysischart = dbContext.Bodyanalysischart.FirstOrDefault(t => t.Id == burialmainBodyanalysischart.MainBodyanalysischartid);
+    }
+
+    var burialmainArtifactkomaushimregister = dbContext.ArtifactkomaushimregisterBurialmain.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
+    if (burialmainArtifactkomaushimregister != null)
+    {
+        var artifactkomaushimregister = dbContext.Artifactkomaushimregister.FirstOrDefault(t => t.Id == burialmainArtifactkomaushimregister.MainArtifactkomaushimregisterid);
+    }
+
+    var burialmainArtifactfagelgamousregister = dbContext.ArtifactfagelgamousregisterBurialmain.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
+    if (burialmainArtifactfagelgamousregister != null)
+    {
+        var artifactfagelgamousregister = dbContext.Artifactfagelgamousregister.FirstOrDefault(t => t.Id == burialmainArtifactfagelgamousregister.MainArtifactfagelgamousregisterid);
+    }
+
+    var burialmainBiological = dbContext.BurialmainBiological.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
+    if (burialmainBiological != null)
+    {
+        var biological = dbContext.Biological.FirstOrDefault(c => c.Id == burialmainBiological.MainBiologicalid);
+
+
+        //var biologicalC14 = dbContext.BiologicalC14.FirstOrDefault(bc => bc.MainBiologicalid == biological.Id);
+        //if (biologicalC14 != null)
+        //{
+        //    var c14 = dbContext.C14.FirstOrDefault(c => c.Id == biologicalC14.MainC14id);
+        //}
+
+    }
+    var dataList = new List<BurialClass>
+    {
         new BurialClass
         {
 
             Area = burialmain.Area,
-            InterorbitalBreadth = (decimal) cranium.InterorbitalBreadth,
-            
-            
+            InterorbitalBreadth = (decimal) (cranium?.InterorbitalBreadth ?? 0),
+
+
         }
     };
 
 }
-<h2>Bop</h2>
-<h2>@bmId</h2>
-<h2>Burialmain ID: @burialmain.Id</h2>
-<p>Area: @burialmain.Area</p>
-<p>AlphaCore @cranium.InterorbitalBreadth</p>
 
 @foreach (var data in dataList)
 {
     @foreach (var property in typeof(BurialClass).GetProperties())
     {
-        
-        <h1>@property.Name</h1>
+       
+        <h1>@property.Name: @data.GetType().GetProperty(property.Name).GetValue(data, null)</h1>
         
     }
-    <h1>Breadth: @data.InterorbitalBreadth</h1>
 
 }
 
