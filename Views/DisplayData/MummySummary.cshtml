@@ -3,6 +3,7 @@
     var dbContext = new MummyContext();
     var burialmain = dbContext.Burialmain.Find(bmId);
     Cranium cranium = null;
+    Textile textile = null;
     var burialmainCranium = dbContext.BurialmainCranium.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
     if (burialmainCranium != null)
     {
@@ -12,7 +13,7 @@
     var burialmainTextile = dbContext.BurialmainTextile.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
     if (burialmainTextile != null)
     {
-        var textile = dbContext.Textile.FirstOrDefault(t => t.Id == burialmainTextile.MainTextileid);
+        textile = dbContext.Textile.FirstOrDefault(t => t.Id == burialmainTextile.MainTextileid);
     }
 
     var burialmainBodyanalysischart = dbContext.BurialmainBodyanalysischart.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
@@ -38,21 +39,53 @@
     {
         var biological = dbContext.Biological.FirstOrDefault(c => c.Id == burialmainBiological.MainBiologicalid);
 
-
-        //var biologicalC14 = dbContext.BiologicalC14.FirstOrDefault(bc => bc.MainBiologicalid == biological.Id);
-        //if (biologicalC14 != null)
-        //{
-        //    var c14 = dbContext.C14.FirstOrDefault(c => c.Id == biologicalC14.MainC14id);
-        //}
-
     }
     var dataList = new List<BurialClass>
     {
         new BurialClass
         {
 
+            Squarenorthsouth = burialmain.Squarenorthsouth,
+            Headdirection = burialmain.Headdirection,
+            Sex = burialmain.Sex,
+            Northsouth = burialmain.Northsouth,
+            Depth = burialmain.Depth,
+            Eastwest = burialmain.Eastwest,
+            Adultsubadult = burialmain.Adultsubadult,
+            Facebundles = burialmain.Facebundles,
+            Southtohead = burialmain.Southtohead,
+            Preservation = burialmain.Preservation,
+            Fieldbookpage = burialmain.Fieldbookpage,
+            Squareeastwest = burialmain.Squareeastwest,
+            Goods = burialmain.Goods,
+            Text = burialmain.Text,
+            Wrapping = burialmain.Wrapping,
+            Haircolor = burialmain.Haircolor,
+            Westtohead = burialmain.Westtohead,
+            Samplescollected = burialmain.Samplescollected,
             Area = burialmain.Area,
-            InterorbitalBreadth = (decimal) (cranium?.InterorbitalBreadth ?? 0),
+            Length = burialmain.Length,
+            Burialnumber = burialmain.Burialnumber,
+            Dataexpertinitials = burialmain.Dataexpertinitials,
+            Westtofeet = burialmain.Westtofeet,
+            Ageatdeath = burialmain.Ageatdeath,
+            Southtofeet = burialmain.Southtofeet,
+            //Excavationrecorder = burialmain.Excavationrecorder,
+            //Photos = burialmain.Photos,
+            //Hair = burialmain.Hair,
+            //Burialmaterials = burialmain.Burialmaterials,
+            //Dateofexcavation = burialmain.Dateofexcavation,
+            Fieldbookexcavationyear = burialmain.Fieldbookexcavationyear,
+            Clusternumber = burialmain.Clusternumber,
+            //Shaftnumber = burialmain.Shaftnumber,
+
+            Locale = textile?.Locale ?? "",
+            Description = textile?.Description ?? "",
+            Estimatedperiod = textile?.Estimatedperiod ?? "",
+            Sampledate = textile?.Sampledate ?? null,
+            Photographeddate = textile?.Photographeddate ?? null,
+            Direction = textile?.Direction ?? "",
+            InterorbitalBreadth = Math.Round((decimal) (cranium?.InterorbitalBreadth ?? 0),2),
 
 
         }
@@ -60,14 +93,39 @@
 
 }
 
-@foreach (var data in dataList)
-{
-    @foreach (var property in typeof(BurialClass).GetProperties())
-    {
-       
-        <h1>@property.Name: @data.GetType().GetProperty(property.Name).GetValue(data, null)</h1>
-        
-    }
+<br />
+<br />
+<br />
+<table class="table table-bordered table-striped">
 
-}
+    <thead>
+        <tr>
+            @foreach (var property in typeof(BurialClass).GetProperties())
+            {
+                <th>
+                    @property.Name
 
+                </th>
+
+            }
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+
+        @foreach (var data in dataList)
+        {
+            @foreach (var property in typeof(BurialClass).GetProperties())
+            {
+                <td>@data.GetType().GetProperty(property.Name).GetValue(data, null)</td>
+
+            }
+
+        }
+        </tr>
+    </tbody>
+
+</table>
+<br />
+<br />
+<br />
