@@ -20,10 +20,7 @@ namespace MummyNation_Team0113.Data
             //Seed Default User
             var defaultUser = new ApplicationUser
             {
-                UserName = "pharaoh",
                 Email = "pharaoh@egypt.com",
-                EmailConfirmed = true,
-                PhoneNumberConfirmed = true
             };
             if (userManager.Users.All(u => u.Id != defaultUser.Id))
             {

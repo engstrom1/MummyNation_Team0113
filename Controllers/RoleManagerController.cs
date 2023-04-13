@@ -21,11 +21,13 @@ namespace MummyNation_Team0113.Controllers
         {
             _roleManager = roleManager;
         }
+        [Authorize(Roles = "Pharaoh")]
         public async Task<IActionResult> Roles()
         {
             var roles = await _roleManager.Roles.ToListAsync();
             return View(roles);
         }
+        [Authorize(Roles = "Pharaoh")]
         [HttpPost]
         public async Task<IActionResult> AddRole(string roleName)
         {

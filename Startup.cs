@@ -15,13 +15,46 @@ using System.Linq;
 using System.Threading.Tasks;
 using Npgsql;
 using System.Security.Claims;
+using Amazon.SecretsManager;
+using Amazon;
+using Amazon.SecretsManager.Model;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using Microsoft.ML.OnnxRuntime;
 
 namespace MummyNation_Team0113
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+    //static async Task GetSecret()
+    //{
+    //    string secretName = "PostgresSQLConnection";
+    //    string region = "us-east-1";
+
+    //    IAmazonSecretsManager client = new AmazonSecretsManagerClient(RegionEndpoint.GetBySystemName(region));
+
+    //    GetSecretValueRequest request = new GetSecretValueRequest
+    //    {
+    //        SecretId = secretName,
+    //        VersionStage = "AWSCURRENT", // VersionStage defaults to AWSCURRENT if unspecified.
+    //    };
+
+    //    GetSecretValueResponse response;
+
+    //    try
+    //    {
+    //        response = await client.GetSecretValueAsync(request);
+    //    }
+    //    catch (Exception e)
+    //    {
+    //        // For a list of the exceptions thrown, see
+    //        // https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+    //        throw e;
+    //    }
+
+    //    string secret = response.SecretString;
+    //}
+    public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
@@ -31,9 +64,30 @@ namespace MummyNation_Team0113
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Configure DbContext to use the connection string from AWS Secrets Manager
+            //services.AddDbContext<MummyContext>(options =>
+            //    options.UseNpgsql(GetSecret().ToString()));
+
+            //var client = new AmazonSecretsManagerClient();
+            //var request = new GetSecretValueRequest
+            //{
+            //    SecretId = "PostgresSQLConnection"
+            //};
+            //var response = await client.GetSecretValueAsync(request);
+            //if (response.SecretString != null)
+            //{
+            //    // The secret value is a JSON string, so you can deserialize it to get the connection string.
+            //    var secret = JsonConvert.DeserializeObject<Dictionary<string, string>>(response.SecretString);
+            //    var connectionString = secret["connectionString"];
+            //    // Use the connection string to connect to your RDS database.
+            //}
+
+
+
+            var pgConnectString = Configuration["ConnectionStrings:PostgreSQLConnection"];
             services.AddDbContext<MummyContext>(options =>
-                options.UseNpgsql(
-                    Configuration.GetConnectionString("PostgreSQLConnection")));
+                options.UseNpgsql(pgConnectString));
+            //services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -63,7 +117,20 @@ namespace MummyNation_Team0113
             new InferenceSession("Data/model_5.onnx")
             );
             services.AddControllersWithViews();
-            services.AddCors();
+            //services.AddAuthentication()
+            //    .AddMicrosoftAccount(microsoftOptions =>
+            //    {
+            //        microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ClientId"];
+            //        microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
+            //    })
+            //    .AddGoogle(options =>
+            //    {
+            //        IConfigurationSection googleAuthNSection =
+            //            Configuration.GetSection("Authentication:Google");
+
+            //        options.ClientId = googleAuthNSection["ClientId"];
+            //        options.ClientSecret = googleAuthNSection["ClientSecret"];
+            //    });
         }
 
 
@@ -94,7 +161,7 @@ namespace MummyNation_Team0113
             app.Use(async (context, next) =>
             {
                 context.Response.Headers.Add("Content-Security-Policy",
-                    "default-src 'self'; script-src 'self' https://ajax.googleapis.com https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; " +
+                    "default-src 'self'; child-src 'self' 'unsafe-inline' 'unsafe-eval'; script-src 'self' https://ajax.googleapis.com https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' 'unsafe-inline' 'unsafe-eval'; " +
                     "connect-src 'self'; media-src 'self'; frame-src 'self' https://www.google.com/");
                 await next();
             });
@@ -126,6 +193,8 @@ namespace MummyNation_Team0113
                     pattern: "{controller=RoleManager}/{action=Roles}");
                 endpoints.MapRazorPages();
             });
+
+            
         }
     }
 }

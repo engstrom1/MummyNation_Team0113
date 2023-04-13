@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MummyNation_Team0113.Models;
@@ -18,6 +19,7 @@ namespace MummyNation_Team0113.Controllers
             _roleManager = roleManager;
             _userManager = userManager;
         }
+        //[Authorize(Roles = "Pharaoh")]
         public async Task<IActionResult> Users()
         {
             var users = await _userManager.Users.ToListAsync();
@@ -32,10 +34,12 @@ namespace MummyNation_Team0113.Controllers
             }
             return View(userRolesViewModel);
         }
+        //[Authorize(Roles = "Pharaoh")]
         private async Task<List<string>> GetUserRoles(ApplicationUser user)
         {
             return new List<string>(await _userManager.GetRolesAsync(user));
         }
+        //[Authorize(Roles = "Pharaoh")]
         public async Task<IActionResult> Manage(string userId)
         {
             ViewBag.userId = userId;
@@ -67,6 +71,7 @@ namespace MummyNation_Team0113.Controllers
             return View(model);
         }
 
+        //[Authorize(Roles = "Pharaoh")]
         [HttpPost]
         public async Task<IActionResult> Manage(List<ManageUserRolesViewModel> model, string userId)
         {
@@ -88,8 +93,10 @@ namespace MummyNation_Team0113.Controllers
                 ModelState.AddModelError("", "Cannot add selected roles to user");
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Users");
         }
+
+        //[Authorize(Roles = "Pharaoh")]
         [HttpPost]
         public async Task<IActionResult> Delete(string userId)
         {

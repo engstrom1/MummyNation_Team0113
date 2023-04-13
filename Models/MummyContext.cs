@@ -1,8 +1,14 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Amazon.SecretsManager;
+using Amazon.SecretsManager.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
+
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -61,13 +67,12 @@ namespace MummyNation_Team0113.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseNpgsql("User ID=postgres;Password=W0rd50fr@d1@nc3;Host=localhost;Database=Mummy");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Analysis>(entity =>
             {
                 entity.ToTable("analysis");

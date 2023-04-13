@@ -51,7 +51,6 @@ namespace MummyNation_Team0113.Models
         public string Direction { get; set; }
         public decimal InterorbitalBreadth { get; set; }
 
-
-
+        
     }
 }
