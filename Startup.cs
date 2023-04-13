@@ -20,6 +20,7 @@ using Amazon;
 using Amazon.SecretsManager.Model;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Microsoft.ML.OnnxRuntime;
 
 namespace MummyNation_Team0113
 {
@@ -83,9 +84,10 @@ namespace MummyNation_Team0113
 
 
 
+            var pgConnectString = Configuration["ConnectionStrings:PostgreSQLConnection"];
             services.AddDbContext<MummyContext>(options =>
-                options.UseNpgsql(
-                    Configuration.GetConnectionString("PostgreSQLConnection")));
+                options.UseNpgsql(pgConnectString));
+            //services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -111,6 +113,9 @@ namespace MummyNation_Team0113
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
             });
+            services.AddSingleton<InferenceSession>(
+            new InferenceSession("Data/model_5.onnx")
+            );
             services.AddControllersWithViews();
             //services.AddAuthentication()
             //    .AddMicrosoftAccount(microsoftOptions =>
@@ -152,13 +157,14 @@ namespace MummyNation_Team0113
             app.UseAuthorization();
             app.UseHsts();
             app.UseHttpsRedirection();
-            //app.Use(async (context, next) =>
-            //{
-            //    context.Response.Headers.Add("Content-Security-Policy",
-            //        "default-src 'self'; script-src 'self' https://ajax.googleapis.com https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; " +
-            //        "connect-src 'self'; media-src 'self'; frame-src 'self' https://www.google.com/");
-            //    await next();
-            //});
+            app.UseCors(p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("Content-Security-Policy",
+                    "default-src 'self'; child-src 'self' 'unsafe-inline' 'unsafe-eval'; script-src 'self' https://ajax.googleapis.com https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' 'unsafe-inline' 'unsafe-eval'; " +
+                    "connect-src 'self'; media-src 'self'; frame-src 'self' https://www.google.com/");
+                await next();
+            });
 
 
 
