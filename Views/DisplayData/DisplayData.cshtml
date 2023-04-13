@@ -12,19 +12,22 @@
 <div class="row" style="padding-bottom: 75px;">
 
     <vc:Filter></vc:Filter>
-    <form asp-action="Create" asp-controller="Crud">
-        <button type="submit" class="btn btn-primary">Add Entry</button>
-    </form>
+    @if (User.IsInRole("Pharaoh"))
+    {
+        <form asp-action="Create" asp-controller="Crud">
+            <button type="submit" class="btn btn-primary">Add Entry</button>
+        </form>
+    }
 
-    <div class="col-9">
-        @foreach (var b in Model.burialmain)
-        {
-            <partial name="MummyCard" model="b" />
-        }
-        <div page-model="@Model.PageInfo" page-action="DisplayData"></div>
+        <div class="col-9">
+            @foreach (var b in Model.burialmain)
+            {
+                <partial name="MummyCard" model="b" />
+            }
+            <div page-model="@Model.PageInfo" page-action="DisplayData"></div>
 
-        <br />
-        <br />
-        <br />
+            <br />
+            <br />
+            <br />
+        </div>
     </div>
-</div>
