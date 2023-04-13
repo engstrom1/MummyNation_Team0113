@@ -3,3 +3,135 @@
 *@
 @{
 }
+<style>
+    body {
+        padding-top: 150px;
+        background-color: #283845;
+    }
+
+    input[type="submit"] {
+        background-color: #283845;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+    }
+
+    form {
+        background-color: white;
+        color: black; 
+    }
+
+</style>
+
+<div class="row" style="padding-bottom: 75px;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <form onsubmit="submitForm(); return false;">
+                <div class="row">
+      <div class="col-md-4 mb-3">
+      <label for="square-north-south">Square North South</label>
+                        <input type="number" class="form-control" id="square-north-south" name="SquareNorthSouth" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="depth">Depth</label>
+      <input type="number" step="0.01" class="form-control" id="depth" name="Depth" required>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <label for="south-to-head">South To Head</label>
+                        <input type="number" step="0.01" class="form-control" id="south-to-head" name="SouthToHead" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="square-east-west">Square East West</label>
+                        <input type="number" class="form-control" id="square-east-west" name="SquareEastWest" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="west-to-head">West To Head</label>
+                        <input type="number" step="0.01" class="form-control" id="west-to-head" name="WestToHead" required>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <label for="length">Length</label>
+                        <input type="number" step="0.01" class="form-control" id="length" name="Length" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="west-to-feet">West To Feet</label>
+                        <input type="number" step="0.01" class="form-control" id="west-to-feet" name="WestToFeet" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="south-to-feet">South To Feet</label>
+                        <input type="number" step="0.01" class="form-control" id="south-to-feet" name="SouthToFeet" required>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <label for="textiles">Textiles</label>
+                        <input type="number" class="form-control" id="textiles" name="Textiles" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="negative-south-to-head">Negative South To Head</label>
+                        <input type="number" step="0.01" class="form-control" id="negative-south-to-head" name="NegativeSouthToHead" required>
+    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="negative-south-to-feet">Negative South To Feet</label>
+                        <input type="number" step="0.01" class="form-control" id="negative-south-to-feet" name="NegativeSouthToFeet" required>
+                    </div>
+    </div>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="negative-south-to-head">Negative West To Head</label>
+                        <input type="number" class="form-control" id="NegativeWestToHead" name="NegativeWestToHead" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="negative-west-to-feet">Negative West To Feet</label>
+                        <input type="number" step="0.01" class="form-control" id="negative-south-to-head" name="NegativeWestToFeet" required>
+                    </div>
+                    </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+
+                </form> 
+</div>
+    </div>
+</div> 
+
+<script>
+    function submitForm() {
+        const form = document.querySelector('form');
+        const formData = new FormData(form);
+        const json = {};
+        formData.forEach((value, key) => {
+            json[key] = value;
+        });
+        console.log(json);
+
+        var jsonString = JSON.stringify(json);
+
+        try {
+            // send the POST request to the URL
+            const response = await fetch("https://localhost:44343/score", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonString
+            });
+
+            // get the response content as a string
+            var responseString = await response.text();
+
+            // do something with the response
+            console.log(responseString);
+
+            let trimmedString = responseString.substring(19, responseString.length - 2);
+            //console.log(trimmedString);
+
+            document.getElementById("response").innerHTML = trimmedString
+        } catch (error) {
+            // handle the exception
+            console.error(error);
+        }
+    }
+</script>
