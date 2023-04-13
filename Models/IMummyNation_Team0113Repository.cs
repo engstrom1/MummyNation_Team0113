@@ -14,5 +14,12 @@ namespace MummyNation_Team0113.Models
         void DeleteBurialmain(long id);
         Burialmain GetBurialmainById(long id);
         MummyContext GetDbContext();
+
+        IQueryable<Textilefunction> textilefunction { get; }
+
+        IQueryable<Textile> textile { get; }
+
+        IQueryable<BurialmainTextile> Burialmaintextile { get; } 
     }
+
 }

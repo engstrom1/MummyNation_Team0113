@@ -1,44 +1,5 @@
 ﻿
 @model Dictionary<string, List<string>>
-@*<div class="col-3">*@
-   @* <div class="accordion" id="accordionFilter">
-                    @foreach (var item in Model)
-                    {
-                        <div class="card">
-                            <div class="card-header" id="heading@(item.Key)">
-                                <h2 class="mb-0">
-                                    <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#collapse@(item.Key)" aria-expanded="true" aria-controls="collapse@(item.Key)">
-                            @{
-                                var titleCase = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(item.Key.ToLower());
-                            }
-
-                            Filter By @titleCase
-                                    </button>
-                                </h2>
-                            </div>
-                <div id="collapse@(item.Key)" class="collapse" aria-labelledby="heading@(item.Key)" data-bs-parent="#accordionFilter">
-                        <div class="card-body">
-                            <div>
-                                <div class="row">
-                                    <div class="col gap-4">
-                                        <a asp-controller="DisplayData" asp-action="DisplayData" asp-route-data="" class="mt-1 btn btn-sm btn-outline-secondary">Home</a>
-
-                                    @foreach (string t in item.Value)
-                                        {
-                                            <a asp-controller="DisplayData" asp-action="DisplayData" asp-route-data="@t"
-                                               class="btn @(ViewBag.Selected == t ? "btn-primary btn-sm mt-1" : "btn-sm btn-outline-secondary mt-1")">@t</a>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-            </div>
-  }*@
-
-@*            </div>
-        </div>
-*@
 
 <div class="accordion" id="accordionFilter">
     <div class="card">
@@ -54,7 +15,14 @@
                                     <option value="">Select an option</option>
                                     @foreach (string t in item.Value)
                                     {
-                                        <option value="@t">@t</option>
+                                        if (t == "N LL")
+                                        {
+                                            <option value="@t">NULL</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@t">@t</option>
+                                        }
                                     }
                                 </select>
                             </div>
@@ -67,9 +35,36 @@
             </div>
         </div>
     </div>
+
+    <!-- New collapse button for Search By ID section -->
+    <div class="card">
+        <div id="collapseSearchByID" class="collapse" aria-labelledby="headingSearchByID" data-bs-parent="#accordionFilter">
+            <div class="card-body">
+                <form method="POST" action="@Url.Action("DisplayData", "DisplayData")">
+                    <div class="mb-3">
+                        <label for="searchInput" class="form-label">Search By ID</label>
+                        <input type="text" class="form-control" id="searchInput" name="searchInput"  data-val="true"
+                               data-val-regex="The input must be a number with at least 15 digits."
+                               data-val-regex-pattern="^\d{15,}$" />
+                    </div>
+                    <div class="text-end mt-3">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </div>
 
-<button class="btn btn-outline-secondary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
-    <span class="bi bi-funnel"></span> Filter Options
-</button>
+<div class="d-flex flex-column">
+    <!-- New collapse button toggle for Search By ID section -->
+    <button class="btn btn-outline-secondary mb-2 btn-sm ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSearchByID" aria-expanded="false" aria-controls="collapseSearchByID">
+        <span class="bi bi-search"></span> Search By ID
+    </button>
 
+    <!-- Existing collapse button for Filter Options -->
+    <button class="btn btn-outline-secondary mb-2 btn-sm ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
+        <span class="bi bi-funnel"></span> Filter Options
+    </button>
+</div>

@@ -44,16 +44,23 @@ namespace MummyNation_Team0113.Controllers
         public IActionResult MummySummary(long bm)
         {
             ViewData["BmId"] = bm;
-            
+
             return View("MummySummary");
         }
 
         [HttpPost]
         public IActionResult DisplayData(IFormCollection form, int pageNum = 1)
         {
+            // Textile Function
+            // Estimate Stature
+            // Textile structure
+            // Textile color
+
+
             int pageSize = 10;
             var query = repo.burialmain.AsQueryable();
             var filters = new List<Expression<Func<Burialmain, bool>>>();
+            var filtersTextile = new List<Expression<Func<Textilefunction, bool>>>();
             Expression<Func<Burialmain, bool>> combinedFilters = null;
 
             foreach (string key in form.Keys)
@@ -61,30 +68,42 @@ namespace MummyNation_Team0113.Controllers
                 string value = form[key];
                 if (!string.IsNullOrEmpty(value) && value != "" && value != "Select an option")
                 {
-                    switch (key)
+                    if (key == "searchInput")
                     {
-                        case "year":
-                            filters.Add(b => b.Fieldbookexcavationyear == value);
-                            break;
-                        case "hairColor":
-                            filters.Add(b => b.Haircolor == value);
-                            break;
-                        case "headDirection":
-                            filters.Add(b => b.Headdirection == value);
-                            break;
-                        case "ageAtDeath":
-                            filters.Add(b => b.Ageatdeath == value);
-                            break;
-                        case "depth":
-                            filters.Add(b => b.Depth == value);
-                            break;
-                        case "gender":
-                            filters.Add(b => b.Sex == value);
-                            break;
-                        default:
-                            break;
+                        filters.Add(b => b.Id.ToString() == value);
+                    }
+                    else
+                    {
+                        switch (key)
+                        {
+                            case "Year Of Excavation":
+                                filters.Add(b => b.Fieldbookexcavationyear == value);
+                                break;
+                            case "Hair Color":
+                                filters.Add(b => b.Haircolor == value);
+                                break;
+                            case "Head Direction":
+                                filters.Add(b => b.Headdirection == value);
+                                break;
+                            case "Age At Death":
+                                filters.Add(b => b.Ageatdeath == value);
+                                break;
+                            case "Depth":
+                                filters.Add(b => b.Depth == value);
+                                break;
+                            case "Sex":
+                                filters.Add(b => b.Sex == value);
+                                break;
+                            case "Textile Function":
+                                // call func here
+                                filtersTextile.Add(t => t.Value == value);
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
+
             }
 
             // combine all the filters into a single expression
@@ -100,12 +119,19 @@ namespace MummyNation_Team0113.Controllers
                 Console.Write("Query: " + query);
             }
 
+
             var x = new DisplayDataViewModel
             {
+
                 burialmain = query
-                    .OrderBy(b => b.Id)
-                    .Skip((pageNum - 1) * pageSize)
-                    .Take(pageSize),
+            //.   Join(repo.Burialmaintextile,
+                //b => b.Id,
+                //bt => bt.MainBurialmainid,
+               //(b, bt) => new { Burialmain = b, BurialmainTextile = bt })
+            .OrderBy(b => b.Id)
+            .Skip((pageNum - 1) * pageSize)
+            .Take(pageSize),
+
                 PageInfo = new PageInfo
                 {
                     TotalNumBurials = query.Count(),
@@ -116,6 +142,6 @@ namespace MummyNation_Team0113.Controllers
 
             return View("DisplayData", x);
         }
-
     }
 }
+
