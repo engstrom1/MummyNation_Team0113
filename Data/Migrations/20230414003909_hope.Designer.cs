@@ -10,8 +10,8 @@ using MummyNation_Team0113.Data;
 namespace MummyNation_Team0113.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230413211909_secrets")]
-    partial class secrets
+    [Migration("20230414003909_hope")]
+    partial class hope
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

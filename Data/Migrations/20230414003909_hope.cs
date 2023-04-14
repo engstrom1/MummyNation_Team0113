@@ -2,7 +2,7 @@
 
 namespace MummyNation_Team0113.Data.Migrations
 {
-    public partial class secrets : Migration
+    public partial class hope : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

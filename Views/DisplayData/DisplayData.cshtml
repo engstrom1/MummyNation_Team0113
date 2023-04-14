@@ -8,23 +8,28 @@
       background-color: #283845;
     }
 </style>
+<div style="padding-left:50px;">
+    <div style="padding-right:50px;">
+        <div class="row"  style="padding-bottom: 75px;">
+            <vc:Filter></vc:Filter>
+            @if (User.IsInRole("Pharaoh"))
+            {
+                <form asp-action="Create" asp-controller="Crud">
+                    <button type="submit" class="btn btn-primary">Add Entry</button>
+                </form>
+            }
 
-<div class="row" style="padding-bottom: 75px;">
-
-    <vc:Filter></vc:Filter>
-    <form asp-action="Create" asp-controller="Crud">
-        <button type="submit" class="btn btn-primary">Add Entry</button>
-    </form>
-
-    <div class="col-9">
-        @foreach (var b in Model.burialmain)
-        {
-            <partial name="MummyCard" model="b" />
-        }
-        <div page-model="@Model.PageInfo" page-action="DisplayData"></div>
-
-        <br />
-        <br />
-        <br />
+            <div class="col-9">
+                @foreach (var b in Model.burialmain)
+                {
+                    <partial name="MummyCard" model="b" />
+                }
+                <div page-model="@Model.PageInfo" page-action="DisplayData" page-classes-enabled="true" page-class="btn" 
+                    page-class-normal="btn-outline-light" page-class-selected="btn-mummy" class="btn-group pull-right m-1"></div>
+                <br />
+                <br />
+                <br />
+                </div>
+            </div>
+        </div>
     </div>
-</div>

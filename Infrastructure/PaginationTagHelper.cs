@@ -29,36 +29,84 @@ namespace MummyNation_Team0113.Infrastructure
 
         public string PageAction { get; set; }
 
-        public override void Process (TagHelperContext thc, TagHelperOutput tho)
+        public override void Process(TagHelperContext thc, TagHelperOutput tho)
         {
             IUrlHelper uh = uhf.GetUrlHelper(vc);
 
             TagBuilder final = new TagBuilder("div");
 
-            for (int i = 1; i  <= PageModel.TotalPages; i++)
+            if (PageModel.TotalPages > 1)
             {
-                TagBuilder tb = new TagBuilder("a");
-
-                if (i == 1 || i == PageModel.CurrentPage || i == PageModel.TotalPages || (i >= PageModel.CurrentPage - 2 && i <= PageModel.CurrentPage + 2))
+                // Show the first page link
+                if (PageModel.CurrentPage > 2)
                 {
-                    
-                    tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i });
-                    tb.InnerHtml.Append(i.ToString());
+                    TagBuilder firstPageLink = new TagBuilder("a");
+                    firstPageLink.Attributes["href"] = uh.Action(PageAction, new { pageNum = 1 });
+                    firstPageLink.InnerHtml.Append("1");
+                    firstPageLink.AddCssClass(PageClass);
+                    firstPageLink.AddCssClass(PageClassNormal);
+                    final.InnerHtml.AppendHtml(firstPageLink);
                 }
-                else if (i == PageModel.CurrentPage - 3 || i == PageModel.CurrentPage + 3)
-                {
-                    //display ellipsis (...) to indicate skipped pages
-                    tb.InnerHtml.Append("...");
-                }
-                
-                //TagBuilder tb = new TagBuilder("a");
-                //tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i });
-                //tb.InnerHtml.Append(i.ToString());
 
-                final.InnerHtml.AppendHtml(tb);
+                // Show the first ellipsis
+                if (PageModel.CurrentPage > 3)
+                {
+                    TagBuilder firstEllipsis = new TagBuilder("span");
+                    firstEllipsis.InnerHtml.Append("...");
+                    firstEllipsis.AddCssClass(PageClass);
+                    firstEllipsis.AddCssClass(PageClassNormal);
+                    final.InnerHtml.AppendHtml(firstEllipsis);
+                }
+
+                // Show the page links around the current page
+                for (int i = Math.Max(1, PageModel.CurrentPage - 2); i <= Math.Min(PageModel.TotalPages, PageModel.CurrentPage + 2); i++)
+                {
+                    TagBuilder pageLink = new TagBuilder("a");
+                    pageLink.Attributes["href"] = uh.Action(PageAction, new { pageNum = i });
+                    pageLink.InnerHtml.Append(i.ToString());
+
+                    if (i == PageModel.CurrentPage)
+                    {
+                        pageLink.AddCssClass(PageClass);
+                        pageLink.AddCssClass(PageClassSelected);
+                    }
+                    else
+                    {
+                        pageLink.AddCssClass(PageClass);
+                        pageLink.AddCssClass(PageClassNormal);
+                    }
+
+                    final.InnerHtml.AppendHtml(pageLink);
+                }
+
+                // Show the second ellipsis
+                if (PageModel.CurrentPage < PageModel.TotalPages - 2)
+                {
+                    TagBuilder secondEllipsis = new TagBuilder("span");
+                    secondEllipsis.InnerHtml.Append("...");
+                    secondEllipsis.AddCssClass(PageClass);
+                    secondEllipsis.AddCssClass(PageClassNormal);
+                    final.InnerHtml.AppendHtml(secondEllipsis);
+                }
+
+                // Show the final page link
+                if (PageModel.CurrentPage < PageModel.TotalPages - 1)
+                {
+                    TagBuilder lastPageLink = new TagBuilder("a");
+                    lastPageLink.Attributes["href"] = uh.Action(PageAction, new { pageNum = PageModel.TotalPages });
+                    lastPageLink.InnerHtml.Append(PageModel.TotalPages.ToString());
+                    lastPageLink.AddCssClass(PageClass);
+                    lastPageLink.AddCssClass(PageClassNormal);
+                    final.InnerHtml.AppendHtml(lastPageLink);
+                }
             }
 
             tho.Content.AppendHtml(final.InnerHtml);
         }
+
+        public bool PageClassesEnabled { get; set; } = false;
+        public string PageClass { get; set; }
+        public string PageClassNormal { get; set; }
+        public string PageClassSelected { get; set; }
     }
 }

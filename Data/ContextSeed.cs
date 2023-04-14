@@ -15,7 +15,7 @@ namespace MummyNation_Team0113.Data
             await roleManager.CreateAsync(new IdentityRole(Enums.Roles.Basic.ToString()));
         }
 
-        public static async Task SeedSuperAdminAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public static async Task SeedPharaohAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             //Seed Default User
             var defaultUser = new ApplicationUser
@@ -30,6 +30,24 @@ namespace MummyNation_Team0113.Data
                     await userManager.CreateAsync(defaultUser, "Mike&Ike123");
                     await userManager.AddToRoleAsync(defaultUser, Enums.Roles.Basic.ToString());
                     await userManager.AddToRoleAsync(defaultUser, Enums.Roles.Pharaoh.ToString());
+                }
+
+            }
+        }
+        public static async Task SeedPeasantAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        {
+            //Seed Default User
+            var defaultUser = new ApplicationUser
+            {
+                Email = "peasant@egypt.com",
+            };
+            if (userManager.Users.All(u => u.Id != defaultUser.Id))
+            {
+                var user = await userManager.FindByEmailAsync(defaultUser.Email);
+                if (user == null)
+                {
+                    await userManager.CreateAsync(defaultUser, "teddygrahams2");
+                    await userManager.AddToRoleAsync(defaultUser, Enums.Roles.Basic.ToString());
                 }
 
             }

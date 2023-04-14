@@ -833,6 +833,15 @@ section {
   border-color: #fff;
 }
 
+.btn-mummy {
+    color: #fff;
+    background-color: #F19455;
+}
+
+.btn-mummy:hover {
+    color: #fff;
+    background-color: #F2D492;
+}
 /*--------------------------------------------------------------
 # Portfolio
 --------------------------------------------------------------*/
