@@ -20,6 +20,7 @@ using Amazon;
 using Amazon.SecretsManager.Model;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Microsoft.ML.OnnxRuntime;
 
 namespace MummyNation_Team0113
 {
@@ -112,6 +113,9 @@ namespace MummyNation_Team0113
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
             });
+            services.AddSingleton<InferenceSession>(
+            new InferenceSession("Data/model_5.onnx")
+            );
             services.AddControllersWithViews();
             //services.AddAuthentication()
             //    .AddMicrosoftAccount(microsoftOptions =>
@@ -153,6 +157,7 @@ namespace MummyNation_Team0113
             app.UseAuthorization();
             app.UseHsts();
             app.UseHttpsRedirection();
+            app.UseCors(p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.Use(async (context, next) =>
             {
                 context.Response.Headers.Add("Content-Security-Policy",
