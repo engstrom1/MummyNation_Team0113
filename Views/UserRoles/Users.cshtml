@@ -13,36 +13,40 @@
 </style>
 
 <div style="padding-left:50px;">
-    <div class="row"  style="padding-bottom: 75px;">
-        <h1>User Roles</h1>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Email</th>
-                    <th>Roles</th>
-                    <th>Manage Roles</th>
-                    <th>Delete User</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var user in Model)
-                {
-                <tr>
-                    <td>@user.Email</td>
-                    <td>@string.Join(" , ", user.Roles.ToList())</td>
-                    <td>
-                        <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Manage" asp-route-userId="@user.UserId">Manage Roles</a>
-                    </td>
-                     <td>
-                        <form method="post" asp-controller="UserRoles" asp-action="Delete">
-                            <input type="hidden" name="userId" value="@user.UserId" />
-                            <button class="btn btn-danger" onclick="return confirmDelete('@user.UserId')">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                }
-            </tbody>
-        </table>
+    <div style="padding-right:50px;">
+        <div class="row"  style="padding-bottom: 75px;">
+            <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+                    <h2>User Manager</h2>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Roles</th>
+                        <th>Manage Roles</th>
+                        <th>Delete User</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                    <tr>
+                        <td>@user.Email</td>
+                        <td>@string.Join(" , ", user.Roles.ToList())</td>
+                        <td>
+                            <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Manage" asp-route-userId="@user.UserId">Manage Roles</a>
+                        </td>
+                         <td>
+                            <form method="post" asp-controller="UserRoles" asp-action="Delete">
+                                <input type="hidden" name="userId" value="@user.UserId" />
+                                <button class="btn btn-danger" onclick="return confirmDelete('@user.UserId')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 @section scripts {
