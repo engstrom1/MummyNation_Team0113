@@ -114,7 +114,7 @@ namespace MummyNation_Team0113
                 options.Password.RequireUppercase = false;
             });
             services.AddSingleton<InferenceSession>(
-            new InferenceSession("Data/model_5.onnx")
+            new InferenceSession("wwwroot/model_5.onnx")
             );
             services.AddControllersWithViews();
             //services.AddAuthentication()
@@ -158,13 +158,13 @@ namespace MummyNation_Team0113
             app.UseHsts();
             app.UseHttpsRedirection();
             app.UseCors(p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            app.Use(async (context, next) =>
-            {
-                context.Response.Headers.Add("Content-Security-Policy",
-                    "default-src 'self'; child-src 'self' 'unsafe-inline' 'unsafe-eval'; script-src 'self' https://ajax.googleapis.com https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' 'unsafe-inline' 'unsafe-eval'; " +
-                    "connect-src 'self'; media-src 'self'; frame-src 'self' https://www.google.com/");
-                await next();
-            });
+            //app.Use(async (context, next) =>
+            //{
+            //    context.Response.Headers.Add("Content-Security-Policy",
+            //        "default-src 'self'; child-src 'self' 'unsafe-inline' 'unsafe-eval'; script-src 'self' https://ajax.googleapis.com https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' 'unsafe-inline' 'unsafe-eval'; " +
+            //        "connect-src 'self'; media-src 'self'; frame-src 'self' https://www.google.com/");
+            //    await next();
+            //});
 
 
 

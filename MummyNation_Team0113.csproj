@@ -30,4 +30,8 @@
     <Folder Include="Views\Pages\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\model_5.onnx" />
+  </ItemGroup>
+
 </Project>
