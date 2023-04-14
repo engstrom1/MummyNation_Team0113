@@ -21,20 +21,23 @@
         <li>Head Direction : @Model.Headdirection</li>
         <li>Depth: @Model.Depth</li>
     </ul>
-    <form method="post" asp-controller="Crud" asp-action="Edit">
-        <input type="hidden" name="id" value="@Model.Id" />
-        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-        <span class="card-text">
-            <button type="submit" class="btn btn-outline-primary btn-sm float-end"> Edit Entry </button>
-        </span>
-    </form>
-    <form method="post" asp-controller="Crud" asp-action="Remove">
-        <input type="hidden" name="id" value="@Model.Id" />
-        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-        <span class="card-text">
-            <button type="submit" class="btn btn-outline-danger btn-sm float-end" onclick="return confirmDelete('@Model.Id')">Remove Entry</button>
-        </span>
-    </form>
+    @if (User.IsInRole("Pharaoh"))
+    {
+        <form method="post" asp-controller="Crud" asp-action="Edit">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <span class="card-text">
+                <button type="submit" class="btn btn-outline-primary btn-sm float-end">Edit Entry</button>
+            </span>
+        </form>
+        <form method="post" asp-controller="Crud" asp-action="Remove">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <span class="card-text">
+                <button type="submit" class="btn btn-outline-danger btn-sm float-end"onclick="return confirmDelete('@Model.Id')">Remove Entry</button>
+            </span>
+        </form>
+    }
 </div>
 @section scripts {
     <script>
@@ -49,21 +52,3 @@
         }
     </script>
 }
-    @if (User.IsInRole("Pharaoh"))
-    {
-        <form method="post" asp-controller="Crud" asp-action="Remove">
-            <input type="hidden" name="id" value="@Model.Id" />
-            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-            <span class="card-text">
-                <button type="submit" class="btn btn-success btn-sm float-end">Remove Entry</button>
-            </span>
-        </form>
-        <form method="post" asp-controller="Crud" asp-action="Edit">
-            <input type="hidden" name="id" value="@Model.Id" />
-            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-            <span class="card-text">
-                <button type="submit" class="btn btn-success btn-sm float-end">Edit Entry</button>
-            </span>
-        </form>
-    }
-    </div>
