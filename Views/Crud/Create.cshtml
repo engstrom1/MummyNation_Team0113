@@ -1,25 +1,39 @@
 ﻿@{
 
 }
-
-<form method="post" asp-controller="Crud" asp-action="CreateConfirmed">
-
-    <div asp-validation-summary="All" class="text-danger"></div>
-
-    <h1>Add New Burial:</h1>
-
-    @foreach (var property in typeof(Burialmain).GetProperties())
-    {
-            @if (@property.Name != "Id")
-            {
-                <div class="form-group">
-                    <label asp-for="@property.Name">@property.Name:</label>
-                    <input asp-for="@property.Name" name ="@property.Name" value="" type ="@property.PropertyType.Name"class="form-control" />
-                </div>
-            }
+<style>
+    body {
+      padding-top: 150px;
+      background-color: #283845;
+      color: white;
     }
-    <button type="submit" class="btn btn-success btn-sm float-end">Create entry</button>
-</form>
+</style>
 
-<br />
-<br />
+<div style="padding-left:50px;">
+    <div style="padding-right:50px;">
+        <div class="row"  style="padding-bottom: 75px;">
+            <form method="post" asp-controller="Crud" asp-action="CreateConfirmed">
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <h1>Add New Burial:</h1>
+
+                @foreach (var property in typeof(Burialmain).GetProperties())
+                {
+                        @if (@property.Name != "Id")
+                        {
+                            <div class="form-group">
+                                <label asp-for="@property.Name">@property.Name:</label>
+                                <input asp-for="@property.Name" name ="@property.Name" value="" type ="@property.PropertyType.Name"class="form-control" />
+                            </div>
+                        }
+                }
+                <br />
+                <button type="submit" class="btn btn-primary btn-sm float-end">Create entry</button>
+            </form>
+
+            <br />
+            <br />
+        </div>
+    </div>
+</div>

@@ -5,7 +5,13 @@
 
         <h4>@Model.Id</h4>
     </div>
-
+    <form method="post" asp-controller="DisplayData" asp-action="MummySummary">
+        <input type="hidden" name="bm" value="@Model.Id" />
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+        <span class="card-text">
+            <button type="submit" class="btn btn-mummy btn-sm float-end"> View Mummy </button>
+        </span>
+    </form>
     <ul>
         <li>Sex: @Model.Sex</li>
         <li>Age at Death: @Model.Ageatdeath</li>
@@ -15,29 +21,34 @@
         <li>Head Direction : @Model.Headdirection</li>
         <li>Depth: @Model.Depth</li>
     </ul>
-
-    <form method="post" asp-controller="DisplayData" asp-action="MummySummary">
-        <input type="hidden" name="bm" value="@Model.Id" />
-        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-        <span class="card-text">
-            <button type="submit" class="btn btn-success btn-sm float-end">View Mummy</button>
-        </span>
-    </form>
     @if (User.IsInRole("Pharaoh"))
     {
-        <form method="post" asp-controller="Crud" asp-action="Remove">
-            <input type="hidden" name="id" value="@Model.Id" />
-            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-            <span class="card-text">
-                <button type="submit" class="btn btn-success btn-sm float-end">Remove Entry</button>
-            </span>
-        </form>
         <form method="post" asp-controller="Crud" asp-action="Edit">
             <input type="hidden" name="id" value="@Model.Id" />
             <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
             <span class="card-text">
-                <button type="submit" class="btn btn-success btn-sm float-end">Edit Entry</button>
+                <button type="submit" class="btn btn-outline-primary btn-sm float-end">Edit Entry</button>
+            </span>
+        </form>
+        <form method="post" asp-controller="Crud" asp-action="Remove">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <span class="card-text">
+                <button type="submit" class="btn btn-outline-danger btn-sm float-end"onclick="return confirmDelete('@Model.Id')">Remove Entry</button>
             </span>
         </form>
     }
-    </div>
+</div>
+@section scripts {
+    <script>
+        function confirmDelete(userId) {
+            if (confirm("Are you sure you want to delete this user?")) {
+                window.location.href = '/User/Delete/' + userId;
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    </script>
+}

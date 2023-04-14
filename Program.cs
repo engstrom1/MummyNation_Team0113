@@ -28,7 +28,21 @@ namespace MummyNation_Team0113
                     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
                     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                     await ContextSeed.SeedRolesAsync(userManager, roleManager);
-                    await ContextSeed.SeedSuperAdminAsync(userManager, roleManager);
+                    await ContextSeed.SeedPharaohAsync(userManager, roleManager);
+                    await ContextSeed.SeedPeasantAsync(userManager, roleManager);
+                    //string email = "pharaoh@byu.edu";
+                    //string password = "chipsahoy311";
+
+                    //if(await userManager.FindByEmailAsync(email) == null)
+                    //{
+                    //    var user = new ApplicationUser();
+                    //    user.Email = email;
+                    //    user.EmailConfirmed = true;
+
+                    //    await userManager.CreateAsync(user, password);
+                    //    await userManager.AddToRoleAsync(user, "Pharaoh");
+                    //    await userManager.AddToRoleAsync(user, "Basic");
+                    //}
 
                 }
                 catch (Exception ex)

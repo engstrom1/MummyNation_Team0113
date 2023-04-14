@@ -3,28 +3,39 @@
     var dbContext = ViewData["dbContext"] as MummyContext;
     var burialmain = dbContext.Burialmain.Find(bmId);
 }
-
-<form method="post" asp-controller="Crud" asp-action="EditConfirmed">
-
-    <div asp-validation-summary="All" class="text-danger"></div>
-
-    <h1>Edit Entry:</h1>
-
-    @foreach (var property in typeof(Burialmain).GetProperties())
-    {
-        @if (@property.Name != "Id")
-        {
-            <div class="form-group">
-                <label asp-for="@property.Name">@property.Name:</label>
-                <input asp-for="@property.Name" name="@property.Name" value="@burialmain.GetType().GetProperty(property.Name).GetValue(burialmain, null)" type="@property.PropertyType.Name" class="form-control" />
-            </div>
-        }
-        <div class="form-group">
-            <input type="hidden" name="id" value="@bmId" />
-        </div>
+<style>
+    body {
+      padding-top: 150px;
+      background-color: #283845;
     }
-    <button type="submit" class="btn btn-success btn-sm float-end">Update Entry</button>
-</form>
+</style>
+<div style="padding-left:50px;">
+    <div style="padding-right:50px;">
+        <div class="row"  style="padding-bottom: 75px;">
+            <form method="post" asp-controller="Crud" asp-action="EditConfirmed">
 
-<br />
-<br />
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <h1>Edit Entry:</h1>
+
+                @foreach (var property in typeof(Burialmain).GetProperties())
+                {
+                    @if (@property.Name != "Id")
+                    {
+                        <div class="form-group">
+                            <label asp-for="@property.Name">@property.Name:</label>
+                            <input asp-for="@property.Name" name="@property.Name" value="@burialmain.GetType().GetProperty(property.Name).GetValue(burialmain, null)" type="@property.PropertyType.Name" class="form-control" />
+                        </div>
+                    }
+                    <div class="form-group">
+                        <input type="hidden" name="id" value="@bmId" />
+                    </div>
+                }
+                <button type="submit" class="btn btn-success btn-sm float-end">Update Entry</button>
+            </form>
+
+            <br />
+            <br />
+        </div>
+    </div>
+</div>
