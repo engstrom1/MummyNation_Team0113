@@ -1,56 +1,56 @@
 ﻿@{
     var bmId = ViewData["BmId"] as long?;
-    var dbContext = new MummyContext();
+    var dbContext = ViewData["dbContext"] as MummyContext;
     var burialmain = dbContext.Burialmain.Find(bmId);
-    Cranium cranium = null;
-    Textile textile = null;
-    List<Textile> textileList = new List<Textile>();
+    //Cranium cranium = null;
+    //Textile textile = null;
+    //List<Textile> textileList = new List<Textile>();
     List<string> locale = new List<string>();
-    var burialmainCranium = dbContext.BurialmainCranium.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
+    //var burialmainCranium = dbContext.BurialmainCranium.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
 
-    if (burialmainCranium != null)
-    {
-        cranium = dbContext.Cranium.FirstOrDefault(c => c.Id == burialmainCranium.MainCraniumid);
-    }
+    //if (burialmainCranium != null)
+    //{
+    //    cranium = dbContext.Cranium.FirstOrDefault(c => c.Id == burialmainCranium.MainCraniumid);
+    //}
 
-    var burialmainTextile = dbContext.BurialmainTextile.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
-    if (burialmainTextile != null)
-    {
-        textileList = dbContext.Textile.Where(t => t.Id == burialmainTextile.MainTextileid).ToList();
-    }
+    //var burialmainTextile = dbContext.BurialmainTextile.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
+    //if (burialmainTextile != null)
+    //{
+    //    textileList = dbContext.Textile.Where(t => t.Id == burialmainTextile.MainTextileid).ToList();
+    //}
 
-    var burialmainBodyanalysischart = dbContext.BurialmainBodyanalysischart.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
-    if (burialmainBodyanalysischart != null)
-    {
-        var bodyanalysischart = dbContext.Bodyanalysischart.FirstOrDefault(t => t.Id == burialmainBodyanalysischart.MainBodyanalysischartid);
-    }
+    //var burialmainBodyanalysischart = dbContext.BurialmainBodyanalysischart.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
+    //if (burialmainBodyanalysischart != null)
+    //{
+    //    var bodyanalysischart = dbContext.Bodyanalysischart.FirstOrDefault(t => t.Id == burialmainBodyanalysischart.MainBodyanalysischartid);
+    //}
 
-    var burialmainArtifactkomaushimregister = dbContext.ArtifactkomaushimregisterBurialmain.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
-    if (burialmainArtifactkomaushimregister != null)
-    {
-        var artifactkomaushimregister = dbContext.Artifactkomaushimregister.FirstOrDefault(t => t.Id == burialmainArtifactkomaushimregister.MainArtifactkomaushimregisterid);
-    }
+    //var burialmainArtifactkomaushimregister = dbContext.ArtifactkomaushimregisterBurialmain.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
+    //if (burialmainArtifactkomaushimregister != null)
+    //{
+    //    var artifactkomaushimregister = dbContext.Artifactkomaushimregister.FirstOrDefault(t => t.Id == burialmainArtifactkomaushimregister.MainArtifactkomaushimregisterid);
+    //}
 
-    var burialmainArtifactfagelgamousregister = dbContext.ArtifactfagelgamousregisterBurialmain.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
-    if (burialmainArtifactfagelgamousregister != null)
-    {
-        var artifactfagelgamousregister = dbContext.Artifactfagelgamousregister.FirstOrDefault(t => t.Id == burialmainArtifactfagelgamousregister.MainArtifactfagelgamousregisterid);
-    }
+    //var burialmainArtifactfagelgamousregister = dbContext.ArtifactfagelgamousregisterBurialmain.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
+    //if (burialmainArtifactfagelgamousregister != null)
+    //{
+    //    var artifactfagelgamousregister = dbContext.Artifactfagelgamousregister.FirstOrDefault(t => t.Id == burialmainArtifactfagelgamousregister.MainArtifactfagelgamousregisterid);
+    //}
 
-    var burialmainBiological = dbContext.BurialmainBiological.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
-    if (burialmainBiological != null)
-    {
-        var biological = dbContext.Biological.FirstOrDefault(c => c.Id == burialmainBiological.MainBiologicalid);
+    //var burialmainBiological = dbContext.BurialmainBiological.FirstOrDefault(bc => bc.MainBurialmainid == bmId);
+    //if (burialmainBiological != null)
+    //{
+    //    var biological = dbContext.Biological.FirstOrDefault(c => c.Id == burialmainBiological.MainBiologicalid);
 
-    }
+    //}
 
-    foreach(var t in textileList)
-    {
-        if (t?.Locale != null)
-        {
-            locale.Add(t.Locale);
-        }
-    }
+    //foreach(var t in textileList)
+    //{
+    //    if (t?.Locale != null)
+    //    {
+    //        locale.Add(t.Locale);
+    //    }
+    //}
 
     var dataList = new List<BurialClass>
     {
@@ -91,38 +91,51 @@
             Clusternumber = burialmain?.Clusternumber ?? null,
             //Shaftnumber = burialmain?.Shaftnumber ?? null,
 
-            // Start doing the textiles
-            Locale = locale != null && locale.Count > 0 ? string.Join(" - ", locale) : null,
-            //Locale = textile?.Locale ?? "",
-            Description = textile?.Description ?? null,
-            Estimatedperiod = textile?.Estimatedperiod ?? null,
-            Sampledate = textile?.Sampledate ?? null,
-            Photographeddate = textile?.Photographeddate ?? null,
-            Direction = textile?.Direction ?? null,
-            InterorbitalBreadth = Math.Round((decimal) (cranium?.InterorbitalBreadth ?? 0),2),
+            //// Start doing the textiles
+            //Locale = locale != null && locale.Count > 0 ? string.Join(" - ", locale) : null,
+            ////Locale = textile?.Locale ?? "",
+            //Description = textile?.Description ?? null,
+            //Estimatedperiod = textile?.Estimatedperiod ?? null,
+            //Sampledate = textile?.Sampledate ?? null,
+            //Photographeddate = textile?.Photographeddate ?? null,
+            //Direction = textile?.Direction ?? null,
+            //InterorbitalBreadth = Math.Round((decimal) (cranium?.InterorbitalBreadth ?? 0),2),
 
 
         }
     };
 
 }
+<style>
+    body {
+      padding-top: 150px;
+      background-color: #283845;
+      color: white;
+    }
+</style>
 
-<br />
-<br />
-<br />
-        @foreach (var data in dataList)
-        {
-            @foreach (var property in typeof(BurialClass).GetProperties())
-            {
-                @if (data.GetType().GetProperty(property.Name).GetValue(data, null) != null) // only print if the data is not null
+<div style="padding-left:50px;">
+    <div style="padding-right:50px;">
+        <div class="row"  style="padding-bottom: 75px;">
+            <br />
+            <br />
+            <br />
+                    @foreach (var data in dataList)
                     {
-                        <h1>@property.Name: @data.GetType().GetProperty(property.Name).GetValue(data, null)</h1>
-                    }
-            }
+                        @foreach (var property in typeof(BurialClass).GetProperties())
+                        {
+                            @if (data.GetType().GetProperty(property.Name).GetValue(data, null) != null) // only print if the data is not null
+                                {
+                                    <h1>@property.Name: @data.GetType().GetProperty(property.Name).GetValue(data, null)</h1>
+                                }
+                        }
 
-        }
-<br />
-      <h1>*Only the data we have is being displayed. Empty fields are filtered out</h1>
-<br />
-<br />
-<br />
+                    }
+            <br />
+                  <h1>*Only the data we have is being displayed. Empty fields are filtered out</h1>
+            <br />
+            <br />
+            <br />
+        </div>
+    </div>
+</div>
