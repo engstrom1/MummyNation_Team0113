@@ -64,32 +64,12 @@ namespace MummyNation_Team0113
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Configure DbContext to use the connection string from AWS Secrets Manager
-            //services.AddDbContext<MummyContext>(options =>
-            //    options.UseNpgsql(GetSecret().ToString()));
-
-            //var client = new AmazonSecretsManagerClient();
-            //var request = new GetSecretValueRequest
-            //{
-            //    SecretId = "PostgresSQLConnection"
-            //};
-            //var response = await client.GetSecretValueAsync(request);
-            //if (response.SecretString != null)
-            //{
-            //    // The secret value is a JSON string, so you can deserialize it to get the connection string.
-            //    var secret = JsonConvert.DeserializeObject<Dictionary<string, string>>(response.SecretString);
-            //    var connectionString = secret["connectionString"];
-            //    // Use the connection string to connect to your RDS database.
-            //}
-
-
-
             var pgConnectString = Configuration["ConnectionStrings:PostgreSQLConnection"];
             services.AddDbContext<MummyContext>(options =>
             options.UseNpgsql(pgConnectString));
             //services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
+                options.UseNpgsql(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
