@@ -86,7 +86,7 @@ namespace MummyNation_Team0113
 
             var pgConnectString = Configuration["ConnectionStrings:PostgreSQLConnection"];
             services.AddDbContext<MummyContext>(options =>
-                options.UseNpgsql(pgConnectString));
+            options.UseNpgsql(pgConnectString));
             //services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
